@@ -60,6 +60,7 @@ export interface Product {
   }
   description?: string
   mainImage: SanityImage
+  price?: number
   brand?: Brand
   categories?: Category[]
   featured?: boolean
