@@ -1,0 +1,6 @@
+{
+  "apps/web/src/**/*.{js,jsx,ts,tsx}": [
+    "cd apps/web && biome format --write",
+    "cd apps/web && biome check --write"
+  ]
+}
