@@ -1,0 +1,41 @@
+import { client } from '@/lib/sanity';
+import { CategoryCard } from '@/components/categories/CategoryCard';
+import type { Category } from '@/types/sanity';
+
+async function getCategories(): Promise<Category[]> {
+  return client.fetch(`
+    *[_type == "category"] | order(order asc) [0...6] {
+      _id,
+      title,
+      slug,
+      description,
+      image
+    }
+  `);
+}
+
+export async function CategoriesGrid() {
+  const categories = await getCategories();
+
+  if (!categories.length) return null;
+
+  return (
+    <section className="bg-gray-50 py-12 md:py-16">
+      <div className="container px-4 md:px-6">
+        <div className="mb-8 text-center">
+          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+            Browse Categories
+          </h2>
+          <p className="mt-2 text-gray-600">
+            Find the right equipment for your needs
+          </p>
+        </div>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {categories.map((category) => (
+            <CategoryCard key={category._id} category={category} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
