@@ -1,5 +1,6 @@
 import {client} from '@/lib/sanity'
 import {Hero} from '@/features/home'
+import {CTASection} from '@/features/home/components/cta-section'
 import {FeaturedProducts} from '@/features/products/FeaturedProducts'
 import {CategoriesGrid} from '@/features/categories/CategoriesGrid'
 import {ServicesOverview} from '@/features/services/ServicesOverview'
@@ -22,6 +23,7 @@ export default async function Home() {
       <FeaturedProducts />
       <CategoriesGrid />
       <ServicesOverview />
+      <CTASection />
     </>
   )
 }
