@@ -1,9 +1,11 @@
-import Image from 'next/image';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
 import { client, urlFor } from '@/lib/sanity';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { generateSEO } from '@/lib/seo';
 import type { Product } from '@/types/sanity';
 
 async function getProduct(slug: string): Promise<Product | null> {
@@ -20,6 +22,29 @@ async function getProduct(slug: string): Promise<Product | null> {
     }`,
     { slug }
   );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const product = await getProduct(params.slug);
+
+  if (!product) {
+    return {};
+  }
+
+  const image = product.mainImage
+    ? urlFor(product.mainImage).width(1200).height(630).url()
+    : undefined;
+
+  return generateSEO({
+    title: product.name,
+    description: product.description || `${product.name} - Premium medical equipment`,
+    path: `/products/${product.slug.current}`,
+    image,
+  });
 }
 
 export default async function ProductDetailPage({
