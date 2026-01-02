@@ -1,4 +1,4 @@
-import { defineType } from 'sanity';
+import {defineType} from 'sanity'
 
 export default defineType({
   name: 'hero',
@@ -21,7 +21,7 @@ export default defineType({
       name: 'backgroundImage',
       title: 'Background Image',
       type: 'image',
-      options: { hotspot: true },
+      options: {hotspot: true},
       validation: (Rule) => Rule.required(),
     },
     {
@@ -36,4 +36,4 @@ export default defineType({
       description: 'Internal path (e.g., /contact) or external URL',
     },
   ],
-});
+})

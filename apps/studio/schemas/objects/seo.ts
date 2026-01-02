@@ -1,4 +1,4 @@
-import { defineType } from 'sanity';
+import {defineType} from 'sanity'
 
 export default defineType({
   name: 'seo',
@@ -25,14 +25,14 @@ export default defineType({
       title: 'Open Graph / Social Share Image',
       type: 'image',
       description: 'Image for social media sharing (1200x630px recommended)',
-      options: { hotspot: true },
+      options: {hotspot: true},
     },
     {
       name: 'keywords',
       title: 'Focus Keywords',
       type: 'array',
-      of: [{ type: 'string' }],
-      options: { layout: 'tags' },
+      of: [{type: 'string'}],
+      options: {layout: 'tags'},
     },
   ],
-});
+})

@@ -1,4 +1,4 @@
-import { defineType } from 'sanity';
+import {defineType} from 'sanity'
 
 export default defineType({
   name: 'categoryReference',
@@ -9,7 +9,7 @@ export default defineType({
       name: 'category',
       title: 'Category',
       type: 'reference',
-      to: [{ type: 'category' }],
+      to: [{type: 'category'}],
       validation: (Rule) => Rule.required(),
     },
     {
@@ -20,9 +20,9 @@ export default defineType({
     },
   ],
   preview: {
-    select: { title: 'category.title', featured: 'featured' },
-    prepare({ title, featured }) {
-      return { title: title || 'Untitled', subtitle: featured ? '⭐ Featured' : '' };
+    select: {title: 'category.title', featured: 'featured'},
+    prepare({title, featured}) {
+      return {title: title || 'Untitled', subtitle: featured ? '⭐ Featured' : ''}
     },
   },
-});
+})
