@@ -22,21 +22,21 @@ export async function CategoriesGrid() {
   if (!categories.length) return null;
 
   return (
-    <section className="bg-gray-50 py-12 md:py-16">
+    <section className="bg-muted/50 py-16 md:py-24">
       <div className="container px-4 md:px-6">
-        <div className="mb-8 flex items-center justify-between">
+        <header className="mb-12 flex items-end justify-between">
           <div>
             <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
               Browse Categories
             </h2>
-            <p className="mt-2 text-gray-600">
+            <p className="mt-2 text-muted-foreground">
               Find the right equipment for your needs
             </p>
           </div>
-          <Button asChild variant="outline">
-            <Link href="/categories">View All</Link>
+          <Button asChild variant="ghost">
+            <Link href="/categories">View All →</Link>
           </Button>
-        </div>
+        </header>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((category) => (
             <CategoryCard key={category._id} category={category} />
