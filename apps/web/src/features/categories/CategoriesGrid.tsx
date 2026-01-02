@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 import { client } from '@/lib/sanity';
 import { CategoryCard } from '@/components/categories/CategoryCard';
 import type { Category } from '@/types/sanity';
@@ -22,13 +24,18 @@ export async function CategoriesGrid() {
   return (
     <section className="bg-gray-50 py-12 md:py-16">
       <div className="container px-4 md:px-6">
-        <div className="mb-8 text-center">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-            Browse Categories
-          </h2>
-          <p className="mt-2 text-gray-600">
-            Find the right equipment for your needs
-          </p>
+        <div className="mb-8 flex items-center justify-between">
+          <div>
+            <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+              Browse Categories
+            </h2>
+            <p className="mt-2 text-gray-600">
+              Find the right equipment for your needs
+            </p>
+          </div>
+          <Button asChild variant="outline">
+            <Link href="/categories">View All</Link>
+          </Button>
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((category) => (

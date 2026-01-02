@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { client, urlFor } from '@/lib/sanity';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
 import type { Product } from '@/types/sanity';
 
 async function getProduct(slug: string): Promise<Product | null> {
@@ -42,35 +45,51 @@ export default async function ProductDetailPage({
             />
           )}
         </div>
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-            {product.name}
-          </h1>
-          {product.price && (
-            <p className="mt-4 text-3xl font-bold text-gray-900">
-              ${product.price.toLocaleString()}
-            </p>
-          )}
+        <div className="space-y-6">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
+              {product.name}
+            </h1>
+            {product.price && (
+              <p className="mt-4 text-3xl font-bold text-gray-900">
+                ${product.price.toLocaleString()}
+              </p>
+            )}
+          </div>
+          
+          <Separator />
+          
           {product.description && (
-            <p className="mt-6 text-gray-600">{product.description}</p>
-          )}
-          {product.brand && (
-            <div className="mt-6">
-              <span className="text-sm font-semibold text-gray-700">Brand: </span>
-              <span className="text-sm text-gray-600">{product.brand.name}</span>
+            <div>
+              <h2 className="text-sm font-semibold text-gray-700">Description</h2>
+              <p className="mt-2 text-gray-600">{product.description}</p>
             </div>
           )}
-          {product.categories && product.categories.length > 0 && (
-            <div className="mt-4">
-              <span className="text-sm font-semibold text-gray-700">Categories: </span>
-              <span className="text-sm text-gray-600">
-                {product.categories.map((cat) => cat.title).join(', ')}
-              </span>
-            </div>
-          )}
-          <button className="mt-8 w-full rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-700 sm:w-auto">
+          
+          <Separator />
+          
+          <div className="space-y-4">
+            {product.brand && (
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-semibold text-gray-700">Brand:</span>
+                <Badge variant="secondary">{product.brand.name}</Badge>
+              </div>
+            )}
+            {product.categories && product.categories.length > 0 && (
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-semibold text-gray-700">Categories:</span>
+                <div className="flex flex-wrap gap-2">
+                  {product.categories.map((cat) => (
+                    <Badge key={cat.slug.current} variant="outline">{cat.title}</Badge>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+          
+          <Button size="lg" className="w-full sm:w-auto">
             Request Quote
-          </button>
+          </Button>
         </div>
       </div>
     </div>
