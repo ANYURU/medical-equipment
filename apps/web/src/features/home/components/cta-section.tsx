@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export function CTASection() {
   return (
@@ -12,18 +13,12 @@ export function CTASection() {
             Get in touch with our team to discuss your equipment needs and receive a customized quote
           </p>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 font-semibold text-blue-600 transition-colors hover:bg-gray-100"
-            >
-              Contact Us
-            </Link>
-            <Link
-              href="/products"
-              className="inline-flex items-center justify-center rounded-lg border-2 border-white px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-700"
-            >
-              Browse Products
-            </Link>
+            <Button asChild size="lg" variant="secondary">
+              <Link href="/contact">Contact Us</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-blue-700">
+              <Link href="/products">Browse Products</Link>
+            </Button>
           </div>
         </div>
       </div>
