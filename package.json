@@ -13,12 +13,14 @@
     "lint": "biome check --config-path=apps/web/biome.json apps/web/",
     "format": "biome format --write --config-path=apps/web/biome.json apps/web/",
     "prepare": "husky",
-    "studio": "npm run dev --workspace=@medical-equipment/studio"
+    "studio": "npm run dev --workspace=@medical-equipment/studio",
+    "dev:all": "concurrently \"npm run dev\" \"npm run studio\" --names \"web,studio\" --prefix-colors \"blue,green\""
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
     "@commitlint/cli": "^20.3.0",
     "@commitlint/config-conventional": "^20.3.0",
+    "concurrently": "^9.2.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "typescript": "^5"
