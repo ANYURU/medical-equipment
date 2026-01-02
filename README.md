@@ -39,7 +39,7 @@ medical-equipment/
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: Next.js 15, React 19, TypeScript, Tailwind CSS
+- **Frontend**: Next.js 16, React 19, TypeScript, Tailwind CSS 4
 - **CMS**: Sanity.io v5
 - **UI Components**: shadcn/ui
 - **Code Quality**: Biome, ESLint, Prettier
@@ -124,7 +124,7 @@ SANITY_STUDIO_DATASET=production
 
 ## 👥 Team
 
-- [Your Name](https://github.com/ANYURU)
+- [Anyuru](https://github.com/ANYURU)
 
 ## 🔗 Links
 
