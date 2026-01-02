@@ -10,12 +10,12 @@ The platform is built as a monorepo containing a Next.js frontend and Sanity CMS
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    User Browser                          │
+│                    User Browser                         │
 └────────────────────┬────────────────────────────────────┘
                      │
                      ▼
 ┌─────────────────────────────────────────────────────────┐
-│              Next.js Application (SSR/SSG)               │
+│              Next.js Application (SSR/SSG)              │
 │  ┌──────────────────────────────────────────────────┐   │
 │  │  App Router (React Server Components)            │   │
 │  │  - Pages & Layouts                               │   │
@@ -26,7 +26,7 @@ The platform is built as a monorepo containing a Next.js frontend and Sanity CMS
                      │
                      ▼
 ┌─────────────────────────────────────────────────────────┐
-│                  Sanity CMS (Headless)                   │
+│                  Sanity CMS (Headless)                  │
 │  ┌──────────────────────────────────────────────────┐   │
 │  │  Content Lake                                    │   │
 │  │  - Products, Categories, Brands                  │   │
@@ -76,7 +76,7 @@ medical-equipment/
 
 ### Frontend (apps/web)
 
-**Framework**: Next.js 15
+**Framework**: Next.js 16
 - App Router with React Server Components
 - Server-side rendering (SSR)
 - Static site generation (SSG)
@@ -84,8 +84,8 @@ medical-equipment/
 
 **UI Layer**:
 - React 19
-- TypeScript for type safety
-- Tailwind CSS for styling
+- TypeScript 5
+- Tailwind CSS 4 for styling
 - shadcn/ui component library
 
 **State Management**:
