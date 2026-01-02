@@ -7,13 +7,13 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "npm run dev --workspace=@medical-equipment/web",
+    "dev": "node scripts/check-node.js npm run dev --workspace=@medical-equipment/web",
     "build": "npm run build --workspaces",
     "start": "npm run start --workspace=@medical-equipment/web",
-    "lint": "biome check --config-path=apps/web/biome.json apps/web/",
-    "format": "biome format --write --config-path=apps/web/biome.json apps/web/",
+    "lint": "node scripts/check-node.js biome check --config-path=apps/web/biome.json apps/web/",
+    "format": "node scripts/check-node.js biome format --write --config-path=apps/web/biome.json apps/web/",
     "prepare": "husky",
-    "studio": "npm run dev --workspace=@medical-equipment/studio",
+    "studio": "node scripts/check-node.js npm run dev --workspace=@medical-equipment/studio",
     "dev:all": "concurrently \"npm run dev\" \"npm run studio\" --names \"web,studio\" --prefix-colors \"blue,green\""
   },
   "devDependencies": {
