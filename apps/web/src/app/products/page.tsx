@@ -1,5 +1,8 @@
 import { client } from '@/lib/sanity';
 import { ProductCard } from '@/components/products/ProductCard';
+import { ProductFilters } from '@/components/products/ProductFilters';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 import {
   Pagination,
   PaginationContent,
@@ -12,13 +15,38 @@ import type { Product } from '@/types/sanity';
 
 const ITEMS_PER_PAGE = 12;
 
-async function getProducts(page: number): Promise<{ products: Product[]; total: number }> {
+async function getProducts(
+  page: number,
+  search?: string,
+  category?: string,
+  brand?: string
+): Promise<{ products: Product[]; total: number }> {
   const start = (page - 1) * ITEMS_PER_PAGE;
   const end = start + ITEMS_PER_PAGE;
 
+  // Build filter conditions
+  const filters = ['_type == "product"'];
+  
+  if (search) {
+    filters.push(`(name match "${search}*" || description match "${search}*")`);
+  }
+  
+  if (category) {
+    filters.push(`references(*[_type == "category" && slug.current == "${category}"]._id)`);
+  }
+  
+  if (brand) {
+    filters.push(`brand._ref in *[_type == "brand" && slug.current == "${brand}"]._id`);
+  }
+
+  const filterQuery = filters.join(' && ');
+  
+  console.log('🔍 Filter Query:', filterQuery);
+  console.log('📊 Params:', { search, category, brand, page });
+
   const [products, total] = await Promise.all([
     client.fetch(
-      `*[_type == "product"] | order(_createdAt desc) [$start...$end] {
+      `*[${filterQuery}] | order(_createdAt desc) [$start...$end] {
         _id,
         name,
         slug,
@@ -29,8 +57,10 @@ async function getProducts(page: number): Promise<{ products: Product[]; total: 
       }`,
       { start, end }
     ),
-    client.fetch(`count(*[_type == "product"])`),
+    client.fetch(`count(*[${filterQuery}])`),
   ]);
+
+  console.log('✅ Found products:', products.length, 'of', total);
 
   return { products, total };
 }
@@ -38,11 +68,16 @@ async function getProducts(page: number): Promise<{ products: Product[]; total: 
 export default async function ProductsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: string }>;
+  searchParams: Promise<{ page?: string; search?: string; category?: string; brand?: string }>;
 }) {
   const params = await searchParams;
   const page = Number(params.page) || 1;
-  const { products, total } = await getProducts(page);
+  const { products, total } = await getProducts(
+    page,
+    params.search,
+    params.category,
+    params.brand
+  );
   const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
 
   return (
@@ -66,6 +101,11 @@ export default async function ProductsPage({
 
       {/* Products Grid */}
       <div className="container px-4 py-12 md:px-6 md:py-16">
+        {/* Filters */}
+        <div className="mb-8">
+          <ProductFilters />
+        </div>
+
         {products.length > 0 ? (
           <>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -99,7 +139,16 @@ export default async function ProductsPage({
           </>
         ) : (
           <div className="py-12 text-center">
-            <p className="text-muted-foreground">No products available at the moment</p>
+            <p className="text-lg text-muted-foreground">
+              {params.search || params.category || params.brand
+                ? `No products found matching your filters`
+                : 'No products available at the moment'}
+            </p>
+            {(params.search || params.category || params.brand) && (
+              <Button variant="outline" className="mt-4" asChild>
+                <Link href="/products">Clear filters</Link>
+              </Button>
+            )}
           </div>
         )}
       </div>
