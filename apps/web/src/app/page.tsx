@@ -1,6 +1,13 @@
 import {client} from '@/lib/sanity'
-import {Hero} from '@/features/home'
-import {CTASection} from '@/features/home/components/cta-section'
+import {
+  Hero,
+  StatsSection,
+  PartnersCarousel,
+  WhyChooseUs,
+  MissionVision,
+  Testimonials,
+  EnhancedCTA,
+} from '@/features/home'
 import {FeaturedProducts} from '@/features/products/FeaturedProducts'
 import {CategoriesGrid} from '@/features/categories/CategoriesGrid'
 import {ServicesOverview} from '@/features/services/ServicesOverview'
@@ -18,12 +25,17 @@ export default async function Home() {
     <>
       <Hero
         title={siteSettings?.siteName || 'Medical Equipment Supply Platform'}
-        subtitle="Premium medical equipment and supplies for healthcare facilities across Uganda"
+        subtitle="Premium medical equipment and supplies for healthcare facilities across Uganda and East Africa. Complete solutions with installation, service, and 24/7 support."
       />
-      <FeaturedProducts />
+      <StatsSection />
+      <PartnersCarousel />
+      <WhyChooseUs />
+      <MissionVision />
       <CategoriesGrid />
+      <FeaturedProducts />
       <ServicesOverview />
-      <CTASection />
+      <Testimonials />
+      <EnhancedCTA />
     </>
   )
 }
