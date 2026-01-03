@@ -29,7 +29,7 @@ export function DistributorsCarousel({heading, distributors}: DistributorsCarous
           {heading || 'Authorized Distributors of Leading Brands'}
         </h2>
         <div className="relative">
-          <div className="flex gap-8 md:gap-12 animate-[scroll_30s_linear_infinite] hover:[animation-play-state:paused]">
+          <div className="flex gap-8 animate-[scroll_30s_linear_infinite] hover:paused md:gap-12">
             {[...displayDistributors, ...displayDistributors].map((distributor, i) => (
               <div
                 key={`${distributor._id}-${i}`}
