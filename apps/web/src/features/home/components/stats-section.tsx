@@ -9,10 +9,10 @@ interface StatsSectionProps {
 }
 
 const defaultStats: Stat[] = [
-  {_id: '1', _type: 'stat', value: 13, suffix: '+', label: 'Years of Excellence', order: 0},
-  {_id: '2', _type: 'stat', value: 50, suffix: '+', label: 'Dedicated Employees', order: 1},
-  {_id: '3', _type: 'stat', value: 98, suffix: '%', label: 'Client Satisfaction', order: 2},
-  {_id: '4', _type: 'stat', value: 1000, suffix: '+', label: 'Happy Clients', order: 3},
+  {_id: '1', _type: 'stat', value: 500, suffix: '+', label: 'Facilities Served', order: 0},
+  {_id: '2', _type: 'stat', value: 50, suffix: '+', label: 'Global Brands', order: 1},
+  {_id: '3', _type: 'stat', value: 15, suffix: '+', label: 'Years Experience', order: 2},
+  {_id: '4', _type: 'stat', value: 24, suffix: '/7', label: 'Support Available', order: 3},
 ]
 
 function useCountUp(end: number, duration: number = 2000) {
@@ -55,16 +55,16 @@ function useCountUp(end: number, duration: number = 2000) {
   return {count, ref}
 }
 
-function StatCard({stat}: {stat: Stat}) {
+function StatCard({stat, className}: {stat: Stat; className?: string}) {
   const {count, ref} = useCountUp(stat.value)
 
   return (
-    <div ref={ref} className="text-center">
-      <div className="text-4xl font-bold text-blue-600 md:text-5xl">
+    <div ref={ref} className={`text-center ${className || ''}`}>
+      <div className="text-4xl font-bold text-blue-400 md:text-5xl mb-2 tracking-tight">
         {count}
         {stat.suffix}
       </div>
-      <div className="mt-2 text-sm text-muted-foreground md:text-base">{stat.label}</div>
+      <div className="text-sm font-medium text-slate-300 md:text-base uppercase tracking-wider">{stat.label}</div>
     </div>
   )
 }
@@ -73,15 +73,17 @@ export function StatsSection({heading, stats}: StatsSectionProps) {
   const displayStats = stats && stats.length > 0 ? stats.sort((a, b) => (a.order || 0) - (b.order || 0)) : defaultStats
 
   return (
-    <section className="border-y bg-muted/30 py-12 md:py-16">
-      <div className="container px-4 md:px-6">
+    <section className="bg-slate-900 border-y py-12 md:py-16 text-white relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none">
+        <div className="absolute inset-0 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
+      </div>
+      
+      <div className="container px-4 md:px-6 relative z-10">
         <div className="mx-auto max-w-5xl">
-          <h2 className="mb-8 text-center text-2xl font-bold md:mb-12 md:text-3xl">
-            {heading || 'Why Choose Medequip Uganda'}
-          </h2>
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-12">
-            {displayStats.map((stat) => (
-              <StatCard key={stat._id} stat={stat} />
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 divide-x divide-slate-800/50">
+            {displayStats.map((stat, i) => (
+              <StatCard key={stat._id} stat={stat} className={i % 2 !== 0 ? 'pl-4 md:pl-0' : ''} />
             ))}
           </div>
         </div>
