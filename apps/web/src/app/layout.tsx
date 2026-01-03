@@ -1,9 +1,12 @@
 import type {Metadata} from 'next'
 import {Geist, Geist_Mono} from 'next/font/google'
+import {Suspense} from 'react'
 import './globals.css'
-import {Header, Footer} from '@/components/layout'
+import {Footer} from '@/components/layout'
+import {getNavigationData} from '@/components/layout/header-with-data'
+import {HeaderClient} from '@/components/layout/header-client'
+import {HeaderSkeleton} from '@/components/layout/header-skeleton'
 import {WhatsAppButton} from '@/components/whatsapp-button'
-import { client } from '@/lib/sanity'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -44,41 +47,22 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const navQuery = `{
-    "products": *[_type == "product"][0...4] {
-      "title": name,
-      "href": "/products/" + slug.current,
-      description
-    },
-    "categories": *[_type == "category"] {
-      title,
-      "href": "/categories/" + slug.current
-    }
-  }`
+  const navigationPromise = getNavigationData()
   
-  let products = []
-  let categories = []
-
-  try {
-    const data = await client.fetch(navQuery)
-    products = data.products
-    categories = data.categories
-  } catch (error) {
-    console.error('Error fetching navigation data from Sanity:', error)
-  }
-
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
-        <Header products={products} categories={categories} />
+        <Suspense fallback={<HeaderSkeleton />}>
+          <HeaderClient dataPromise={navigationPromise} />
+        </Suspense>
         <main className="min-h-screen">{children}</main>
         <Footer />
         <WhatsAppButton />
