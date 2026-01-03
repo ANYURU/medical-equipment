@@ -46,49 +46,63 @@ export default async function ProductsPage({
   const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
 
   return (
-    <div className="container px-4 py-12 md:px-6 md:py-16">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight md:text-4xl">
-          All Products
-        </h1>
-        <p className="mt-2 text-gray-600">
-          Browse our complete range of medical equipment
-        </p>
-      </div>
-      {products.length > 0 ? (
-        <>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {products.map((product) => (
-              <ProductCard key={product._id} product={product} />
-            ))}
+    <>
+      {/* Hero Section */}
+      <section className="border-b bg-linear-to-b from-blue-50 to-background py-12 md:py-16">
+        <div className="container px-4 md:px-6">
+          <div className="mx-auto max-w-3xl text-center">
+            <h1 className="text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
+              Medical Equipment & Supplies
+            </h1>
+            <p className="mt-4 text-lg text-muted-foreground">
+              Browse our complete range of premium medical equipment for healthcare facilities
+            </p>
+            <div className="mt-6 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+              <span className="font-semibold text-foreground">{total}</span> products available
+            </div>
           </div>
-          {totalPages > 1 && (
-            <Pagination className="mt-8">
-              <PaginationContent>
-                {page > 1 && (
-                  <PaginationItem>
-                    <PaginationPrevious href={`/products?page=${page - 1}`} />
-                  </PaginationItem>
-                )}
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-                  <PaginationItem key={p}>
-                    <PaginationLink href={`/products?page=${p}`} isActive={p === page}>
-                      {p}
-                    </PaginationLink>
-                  </PaginationItem>
-                ))}
-                {page < totalPages && (
-                  <PaginationItem>
-                    <PaginationNext href={`/products?page=${page + 1}`} />
-                  </PaginationItem>
-                )}
-              </PaginationContent>
-            </Pagination>
-          )}
-        </>
-      ) : (
-        <p className="text-center text-gray-500">No products available</p>
-      )}
-    </div>
+        </div>
+      </section>
+
+      {/* Products Grid */}
+      <div className="container px-4 py-12 md:px-6 md:py-16">
+        {products.length > 0 ? (
+          <>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {products.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))}
+            </div>
+            {totalPages > 1 && (
+              <Pagination className="mt-12">
+                <PaginationContent>
+                  {page > 1 && (
+                    <PaginationItem>
+                      <PaginationPrevious href={`/products?page=${page - 1}`} />
+                    </PaginationItem>
+                  )}
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                    <PaginationItem key={p}>
+                      <PaginationLink href={`/products?page=${p}`} isActive={p === page}>
+                        {p}
+                      </PaginationLink>
+                    </PaginationItem>
+                  ))}
+                  {page < totalPages && (
+                    <PaginationItem>
+                      <PaginationNext href={`/products?page=${page + 1}`} />
+                    </PaginationItem>
+                  )}
+                </PaginationContent>
+              </Pagination>
+            )}
+          </>
+        ) : (
+          <div className="py-12 text-center">
+            <p className="text-muted-foreground">No products available at the moment</p>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
