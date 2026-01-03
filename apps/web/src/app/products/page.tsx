@@ -38,9 +38,10 @@ async function getProducts(page: number): Promise<{ products: Product[]; total: 
 export default async function ProductsPage({
   searchParams,
 }: {
-  searchParams: { page?: string };
+  searchParams: Promise<{ page?: string }>;
 }) {
-  const page = Number(searchParams.page) || 1;
+  const params = await searchParams;
+  const page = Number(params.page) || 1;
   const { products, total } = await getProducts(page);
   const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
 
