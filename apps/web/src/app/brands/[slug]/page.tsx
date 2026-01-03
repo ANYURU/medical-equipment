@@ -40,9 +40,10 @@ async function getBrandWithProducts(slug: string): Promise<{
 export default async function BrandDetailPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const data = await getBrandWithProducts(params.slug);
+  const { slug } = await params;
+  const data = await getBrandWithProducts(slug);
 
   if (!data) notFound();
 
