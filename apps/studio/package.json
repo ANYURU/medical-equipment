@@ -9,13 +9,15 @@
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "deploy-graphql": "sanity graphql deploy"
+    "deploy-graphql": "sanity graphql deploy",
+    "seed": "tsx scripts/seed.ts"
   },
   "keywords": [
     "sanity"
   ],
   "dependencies": {
     "@sanity/vision": "^5.1.0",
+    "dotenv": "^17.2.3",
     "react": "^19.1",
     "react-dom": "^19.1",
     "sanity": "^5.1.0",

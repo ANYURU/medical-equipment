@@ -14,6 +14,8 @@
     "format": "node scripts/check-node.js biome format --write --config-path=apps/web/biome.json apps/web/",
     "prepare": "husky",
     "studio": "node scripts/check-node.js npm run dev --workspace=@medical-equipment/studio",
+    "studio:deploy": "node scripts/check-node.js npm run deploy --workspace=@medical-equipment/studio",
+    "studio:seed": "node scripts/check-node.js npm run seed --workspace=@medical-equipment/studio",
     "dev:all": "concurrently \"npm run dev\" \"npm run studio\" --names \"web,studio\" --prefix-colors \"blue,green\""
   },
   "devDependencies": {

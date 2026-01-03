@@ -13,6 +13,10 @@ import service from '../schemas/documents/service'
 import blogPost from '../schemas/documents/blogPost'
 import page from '../schemas/documents/page'
 import faq from '../schemas/documents/faq'
+import distributor from '../schemas/documents/distributor'
+import stat from '../schemas/documents/stat'
+import testimonial from '../schemas/documents/testimonial'
+import feature from '../schemas/documents/feature'
 
 export const schemaTypes = [
   seo,
@@ -29,4 +33,8 @@ export const schemaTypes = [
   blogPost,
   page,
   faq,
+  distributor,
+  stat,
+  testimonial,
+  feature,
 ]

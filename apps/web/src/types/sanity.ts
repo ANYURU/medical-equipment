@@ -86,3 +86,88 @@ export interface SanityImage {
   }
   alt?: string
 }
+
+export interface Distributor {
+  _id: string
+  _type: 'distributor'
+  name: string
+  logo: SanityImage
+  order?: number
+}
+
+export interface Stat {
+  _id: string
+  _type: 'stat'
+  value: number
+  suffix?: string
+  label: string
+  order?: number
+}
+
+export interface Testimonial {
+  _id: string
+  _type: 'testimonial'
+  quote: string
+  author: string
+  role: string
+  facility: string
+  photo?: SanityImage
+  featured?: boolean
+  order?: number
+}
+
+export interface Feature {
+  _id: string
+  _type: 'feature'
+  title: string
+  description: string
+  icon: string
+  order?: number
+}
+
+export interface Homepage {
+  _id: string
+  _type: 'homepage'
+  hero: {
+    title: string
+    subtitle?: string
+    primaryButtonText?: string
+    primaryButtonLink?: string
+    secondaryButtonText?: string
+    secondaryButtonLink?: string
+  }
+  statsSection?: {
+    heading?: string
+    stats?: Stat[]
+  }
+  distributorsSection?: {
+    heading?: string
+    distributors?: Distributor[]
+  }
+  whyChooseUsSection?: {
+    heading?: string
+    description?: string
+    features?: Feature[]
+  }
+  missionVisionSection?: {
+    heading?: string
+    description?: string
+    mission?: string
+    missionMetric?: string
+    vision?: string
+    visionMetric?: string
+  }
+  testimonialsSection?: {
+    heading?: string
+    description?: string
+    testimonials?: Testimonial[]
+  }
+  ctaSection?: {
+    heading?: string
+    description?: string
+    primaryButtonText?: string
+    primaryButtonLink?: string
+    secondaryButtonText?: string
+    secondaryButtonLink?: string
+  }
+}

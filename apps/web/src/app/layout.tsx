@@ -1,7 +1,12 @@
 import type {Metadata} from 'next'
 import {Geist, Geist_Mono} from 'next/font/google'
+import {Suspense} from 'react'
 import './globals.css'
-import {Header, Footer} from '@/components/layout'
+import {Footer} from '@/components/layout'
+import {getNavigationData} from '@/components/layout/header-with-data'
+import {HeaderClient} from '@/components/layout/header-client'
+import {HeaderSkeleton} from '@/components/layout/header-skeleton'
+import {WhatsAppButton} from '@/components/whatsapp-button'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -47,14 +52,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const navigationPromise = getNavigationData()
+  
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
       >
-        <Header />
+        <Suspense fallback={<HeaderSkeleton />}>
+          <HeaderClient dataPromise={navigationPromise} />
+        </Suspense>
         <main className="min-h-screen">{children}</main>
         <Footer />
+        <WhatsAppButton />
       </body>
     </html>
   )
