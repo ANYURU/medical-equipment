@@ -1,51 +1,62 @@
 'use client'
 
-interface Testimonial {
-  quote: string
-  author: string
-  role: string
-  facility: string
+import type {Testimonial} from '@/types/sanity'
+
+interface TestimonialsProps {
+  heading?: string
+  description?: string
+  testimonials?: Testimonial[]
 }
 
-const testimonials: Testimonial[] = [
+const defaultTestimonials: Testimonial[] = [
   {
-    quote:
-      'Medequip Uganda transformed our ICU with state-of-the-art equipment and exceptional installation service. Their support team is always responsive.',
+    _id: '1',
+    _type: 'testimonial',
+    quote: 'Medequip Uganda transformed our ICU with state-of-the-art equipment and exceptional installation service. Their support team is always responsive.',
     author: 'Dr. Sarah Namukasa',
     role: 'Head of ICU',
     facility: 'Mulago Hospital',
+    order: 0,
   },
   {
-    quote:
-      'The quality of their medical equipment is outstanding, and their after-sales service is unmatched. We trust them for all our equipment needs.',
+    _id: '2',
+    _type: 'testimonial',
+    quote: 'The quality of their medical equipment is outstanding, and their after-sales service is unmatched. We trust them for all our equipment needs.',
     author: 'Dr. James Okello',
     role: 'Medical Director',
     facility: 'Kampala International Hospital',
+    order: 1,
   },
   {
-    quote:
-      'From consultation to installation, the entire process was seamless. Their team truly understands the needs of healthcare facilities.',
+    _id: '3',
+    _type: 'testimonial',
+    quote: 'From consultation to installation, the entire process was seamless. Their team truly understands the needs of healthcare facilities.',
     author: 'Nurse Margaret Achieng',
     role: 'Procurement Manager',
     facility: 'Nsambya Hospital',
+    order: 2,
   },
 ]
 
-export function Testimonials() {
+export function Testimonials({heading, description, testimonials}: TestimonialsProps) {
+  const displayTestimonials = testimonials && testimonials.length > 0 ? testimonials.sort((a, b) => (a.order || 0) - (b.order || 0)) : defaultTestimonials
+
   return (
     <section className="bg-muted/30 py-12 md:py-20">
       <div className="container px-4 md:px-6">
         <div className="mx-auto max-w-6xl">
           <div className="mb-8 text-center md:mb-12">
-            <h2 className="text-2xl font-bold md:text-3xl">What Our Clients Say</h2>
+            <h2 className="text-2xl font-bold md:text-3xl">
+              {heading || 'What Our Clients Say'}
+            </h2>
             <p className="mt-2 text-muted-foreground">
-              Trusted by healthcare professionals across East Africa
+              {description || 'Trusted by healthcare professionals across East Africa'}
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-3 md:gap-8">
-            {testimonials.map((testimonial, i) => (
+            {displayTestimonials.map((testimonial) => (
               <div
-                key={i}
+                key={testimonial._id}
                 className="rounded-lg border bg-card p-6 transition-all hover:border-blue-600 hover:shadow-lg"
               >
                 <div className="mb-4 text-blue-600">

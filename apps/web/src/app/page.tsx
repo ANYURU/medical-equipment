@@ -11,31 +11,103 @@ import {
 import {FeaturedProducts} from '@/features/products/FeaturedProducts'
 import {CategoriesGrid} from '@/features/categories/CategoriesGrid'
 import {ServicesOverview} from '@/features/services/ServicesOverview'
-import type {SiteSettings} from '@/types/sanity'
+import type {Homepage} from '@/types/sanity'
 
 export default async function Home() {
-  const siteSettings = await client.fetch<SiteSettings>(
-    `*[_type == "siteSettings"][0]{
-      siteName,
-      siteUrl
+  const homepage = await client.fetch<Homepage>(
+    `*[_type == "homepage"][0]{
+      hero,
+      statsSection{
+        heading,
+        stats[]->{
+          _id,
+          value,
+          suffix,
+          label,
+          order
+        }
+      },
+      partnersSection{
+        heading,
+        partners[]->{
+          _id,
+          name,
+          logo,
+          order
+        }
+      },
+      whyChooseUsSection{
+        heading,
+        description,
+        features[]->{
+          _id,
+          title,
+          description,
+          icon,
+          order
+        }
+      },
+      missionVisionSection{
+        heading,
+        description,
+        mission,
+        missionMetric,
+        vision,
+        visionMetric
+      },
+      testimonialsSection{
+        heading,
+        description,
+        testimonials[]->{
+          _id,
+          quote,
+          author,
+          role,
+          facility,
+          photo,
+          order
+        }
+      },
+      ctaSection{
+        heading,
+        description,
+        primaryButtonText,
+        primaryButtonLink,
+        secondaryButtonText,
+        secondaryButtonLink
+      }
     }`,
   )
 
   return (
     <>
       <Hero
-        title={siteSettings?.siteName || 'Medical Equipment Supply Platform'}
-        subtitle="Premium medical equipment and supplies for healthcare facilities across Uganda and East Africa. Complete solutions with installation, service, and 24/7 support."
+        title={homepage?.hero?.title || 'Medical Equipment Supply Platform'}
+        subtitle={homepage?.hero?.subtitle || 'Premium medical equipment and supplies for healthcare facilities across Uganda and East Africa. Complete solutions with installation, service, and 24/7 support.'}
       />
-      <StatsSection />
-      <PartnersCarousel />
-      <WhyChooseUs />
-      <MissionVision />
+      <StatsSection 
+        heading={homepage?.statsSection?.heading}
+        stats={homepage?.statsSection?.stats}
+      />
+      <PartnersCarousel 
+        heading={homepage?.partnersSection?.heading}
+        partners={homepage?.partnersSection?.partners}
+      />
+      <WhyChooseUs 
+        heading={homepage?.whyChooseUsSection?.heading}
+        description={homepage?.whyChooseUsSection?.description}
+        features={homepage?.whyChooseUsSection?.features}
+      />
+      <MissionVision data={homepage?.missionVisionSection} />
       <CategoriesGrid />
       <FeaturedProducts />
       <ServicesOverview />
-      <Testimonials />
-      <EnhancedCTA />
+      <Testimonials 
+        heading={homepage?.testimonialsSection?.heading}
+        description={homepage?.testimonialsSection?.description}
+        testimonials={homepage?.testimonialsSection?.testimonials}
+      />
+      <EnhancedCTA data={homepage?.ctaSection} />
     </>
   )
 }

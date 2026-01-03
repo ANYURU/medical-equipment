@@ -8,9 +8,9 @@ interface HeroProps {
 
 export function Hero({title, subtitle}: HeroProps) {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-blue-50 to-background py-16 md:py-24 lg:py-32">
+    <section className="relative overflow-hidden bg-linear-to-b from-blue-50 to-background py-16 md:py-24 lg:py-32">
       <div className="absolute inset-0 -z-10 opacity-5">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
       </div>
       <div className="container px-4 md:px-6">
         <div className="mx-auto max-w-4xl text-center">

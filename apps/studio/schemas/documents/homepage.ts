@@ -15,6 +15,80 @@ export default defineType({
     {name: 'seo', title: 'SEO', type: 'seo'},
     {name: 'hero', title: 'Hero Section', type: 'hero', validation: (Rule) => Rule.required()},
     {
+      name: 'statsSection',
+      title: 'Stats Section',
+      type: 'object',
+      fields: [
+        {name: 'heading', title: 'Heading', type: 'string', initialValue: 'Why Choose Medequip Uganda'},
+        {
+          name: 'stats',
+          title: 'Statistics',
+          type: 'array',
+          of: [{type: 'reference', to: [{type: 'stat'}]}],
+          validation: (Rule) => Rule.max(6),
+        },
+      ],
+    },
+    {
+      name: 'partnersSection',
+      title: 'Partners/Brands Section',
+      type: 'object',
+      fields: [
+        {name: 'heading', title: 'Heading', type: 'string', initialValue: 'Authorized Distributors of Leading Brands'},
+        {
+          name: 'partners',
+          title: 'Partners',
+          type: 'array',
+          of: [{type: 'reference', to: [{type: 'partner'}]}],
+        },
+      ],
+    },
+    {
+      name: 'whyChooseUsSection',
+      title: 'Why Choose Us Section',
+      type: 'object',
+      fields: [
+        {name: 'heading', title: 'Heading', type: 'string', initialValue: 'Why Healthcare Facilities Choose Us'},
+        {name: 'description', title: 'Description', type: 'string'},
+        {
+          name: 'features',
+          title: 'Features',
+          type: 'array',
+          of: [{type: 'reference', to: [{type: 'feature'}]}],
+          validation: (Rule) => Rule.max(6),
+        },
+      ],
+    },
+    {
+      name: 'missionVisionSection',
+      title: 'Mission & Vision Section',
+      type: 'object',
+      fields: [
+        {name: 'heading', title: 'Section Heading', type: 'string', initialValue: 'Our Story'},
+        {name: 'description', title: 'Description', type: 'string'},
+        {name: 'mission', title: 'Mission Text', type: 'text', rows: 4},
+        {name: 'missionMetric', title: 'Mission Metric', type: 'string', initialValue: '98% Support Satisfaction Rate'},
+        {name: 'vision', title: 'Vision Text', type: 'text', rows: 4},
+        {name: 'visionMetric', title: 'Vision Metric', type: 'string', initialValue: 'Serving Multiple East African Countries'},
+      ],
+    },
+    {
+      name: 'testimonialsSection',
+      title: 'Testimonials Section',
+      type: 'object',
+      fields: [
+        {name: 'heading', title: 'Heading', type: 'string', initialValue: 'What Our Clients Say'},
+        {name: 'description', title: 'Description', type: 'string'},
+        {
+          name: 'testimonials',
+          title: 'Testimonials',
+          type: 'array',
+          of: [{type: 'reference', to: [{type: 'testimonial'}]}],
+          validation: (Rule) => Rule.max(6),
+        },
+      ],
+    },
+    {
       name: 'introSection',
       title: 'Introduction Section',
       type: 'object',
