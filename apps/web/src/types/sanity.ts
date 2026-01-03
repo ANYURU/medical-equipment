@@ -87,9 +87,9 @@ export interface SanityImage {
   alt?: string
 }
 
-export interface Partner {
+export interface Distributor {
   _id: string
-  _type: 'partner'
+  _type: 'distributor'
   name: string
   logo: SanityImage
   order?: number
@@ -140,9 +140,9 @@ export interface Homepage {
     heading?: string
     stats?: Stat[]
   }
-  partnersSection?: {
+  distributorsSection?: {
     heading?: string
-    partners?: Partner[]
+    distributors?: Distributor[]
   }
   whyChooseUsSection?: {
     heading?: string

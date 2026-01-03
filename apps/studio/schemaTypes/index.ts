@@ -13,7 +13,7 @@ import service from '../schemas/documents/service'
 import blogPost from '../schemas/documents/blogPost'
 import page from '../schemas/documents/page'
 import faq from '../schemas/documents/faq'
-import partner from '../schemas/documents/partner'
+import distributor from '../schemas/documents/distributor'
 import stat from '../schemas/documents/stat'
 import testimonial from '../schemas/documents/testimonial'
 import feature from '../schemas/documents/feature'
@@ -33,7 +33,7 @@ export const schemaTypes = [
   blogPost,
   page,
   faq,
-  partner,
+  distributor,
   stat,
   testimonial,
   feature,

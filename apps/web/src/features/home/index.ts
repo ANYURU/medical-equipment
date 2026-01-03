@@ -1,6 +1,6 @@
 export {Hero} from './components/hero'
 export {StatsSection} from './components/stats-section'
-export {PartnersCarousel} from './components/partners-carousel'
+export {DistributorsCarousel} from './components/distributors-carousel'
 export {WhyChooseUs} from './components/why-choose-us'
 export {MissionVision} from './components/mission-vision'
 export {Testimonials} from './components/testimonials'

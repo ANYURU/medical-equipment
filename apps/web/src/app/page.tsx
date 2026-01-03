@@ -2,7 +2,7 @@ import {client} from '@/lib/sanity'
 import {
   Hero,
   StatsSection,
-  PartnersCarousel,
+  DistributorsCarousel,
   WhyChooseUs,
   MissionVision,
   Testimonials,
@@ -27,9 +27,9 @@ export default async function Home() {
           order
         }
       },
-      partnersSection{
+      distributorsSection{
         heading,
-        partners[]->{
+        distributors[]->{
           _id,
           name,
           logo,
@@ -89,9 +89,9 @@ export default async function Home() {
         heading={homepage?.statsSection?.heading}
         stats={homepage?.statsSection?.stats}
       />
-      <PartnersCarousel 
-        heading={homepage?.partnersSection?.heading}
-        partners={homepage?.partnersSection?.partners}
+      <DistributorsCarousel 
+        heading={homepage?.distributorsSection?.heading}
+        distributors={homepage?.distributorsSection?.distributors}
       />
       <WhyChooseUs 
         heading={homepage?.whyChooseUsSection?.heading}

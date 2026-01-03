@@ -30,16 +30,16 @@ export default defineType({
       ],
     },
     {
-      name: 'partnersSection',
-      title: 'Partners/Brands Section',
+      name: 'distributorsSection',
+      title: 'Distributors/Brands Section',
       type: 'object',
       fields: [
         {name: 'heading', title: 'Heading', type: 'string', initialValue: 'Authorized Distributors of Leading Brands'},
         {
-          name: 'partners',
-          title: 'Partners',
+          name: 'distributors',
+          title: 'Distributors',
           type: 'array',
-          of: [{type: 'reference', to: [{type: 'partner'}]}],
+          of: [{type: 'reference', to: [{type: 'distributor'}]}],
         },
       ],
     },

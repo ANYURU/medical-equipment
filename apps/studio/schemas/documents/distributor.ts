@@ -1,8 +1,8 @@
 import {defineType} from 'sanity'
 
 export default defineType({
-  name: 'partner',
-  title: 'Partner/Brand',
+  name: 'distributor',
+  title: 'Distributor/Brand',
   type: 'document',
   fields: [
     {

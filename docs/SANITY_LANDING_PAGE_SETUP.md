@@ -3,7 +3,7 @@
 ## ✅ What We've Integrated
 
 All landing page sections are now managed through Sanity CMS:
-- ✅ Partners/Brands Carousel
+- ✅ Distributors/Brands Carousel
 - ✅ Stats Section
 - ✅ Testimonials
 - ✅ Why Choose Us Features
@@ -22,10 +22,10 @@ npm run dev:studio
 
 ### 2. Create Content in This Order
 
-#### Step 1: Create Partners (4 new documents)
-Navigate to: **Content → Partner/Brand → Create**
+#### Step 1: Create Distributors (4 new documents)
+Navigate to: **Content → Distributor/Brand → Create**
 
-Create 4-8 partners with:
+Create 4-8 distributors with:
 - **Brand Name**: e.g., "Medtronic", "GE Healthcare"
 - **Logo**: Upload brand logo (PNG/SVG, transparent background recommended)
 - **Display Order**: 0, 1, 2, 3... (controls carousel order)
@@ -152,9 +152,9 @@ Fill in all sections:
 - Heading: `Why Choose Medequip Uganda`
 - Statistics: Select all 4 stats you created
 
-**Partners/Brands Section:**
+**Distributors/Brands Section:**
 - Heading: `Authorized Distributors of Leading Brands`
-- Partners: Select all partners you created
+- Distributors: Select all distributors you created
 
 **Why Choose Us Section:**
 - Heading: `Why Healthcare Facilities Choose Us`
@@ -186,7 +186,7 @@ Fill in all sections:
 
 ## 🎨 Logo Upload Tips
 
-### For Partner Logos:
+### For Distributor Logos:
 1. **Format**: PNG with transparent background (preferred) or SVG
 2. **Size**: 400x200px recommended (will be resized automatically)
 3. **Style**: Grayscale or color (component applies grayscale filter with color on hover)
@@ -227,7 +227,7 @@ If no content is added to Sanity, the site displays default hardcoded data. Once
 - **Mission/Vision**: 40-60 words each
 
 ### Image Guidelines
-- **Partners**: Logos only, no text overlays
+- **Distributors**: Logos only, no text overlays
 - **Testimonials**: Optional photos (square crop, 400x400px)
 
 ---
@@ -272,7 +272,7 @@ After populating content:
 
 ## 💡 Pro Tips
 
-1. **Batch Create**: Create all partners first, then reference them in Homepage
+1. **Batch Create**: Create all distributors first, then reference them in Homepage
 2. **Preview**: Use Sanity's preview feature before publishing
 3. **Backup**: Export content regularly (Tools → Export)
 4. **Collaborate**: Invite team members with appropriate roles
@@ -283,7 +283,7 @@ After populating content:
 ## 🎉 You're All Set!
 
 Your landing page is now fully CMS-powered. Non-technical team members can update:
-- Partner logos
+- Distributor logos
 - Statistics
 - Testimonials
 - Features
