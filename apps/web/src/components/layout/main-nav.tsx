@@ -62,11 +62,11 @@ export function MainNav({ products: sanityProducts, categories: sanityCategories
         <NavigationMenuItem>
           <NavigationMenuTrigger className="bg-transparent">Products</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+            <ul className="grid gap-3 p-4 md:w-100 lg:w-125 lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <a
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-blue-600 to-blue-700 p-6 no-underline outline-none focus:shadow-md"
+                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-linear-to-b from-blue-600 to-blue-700 p-6 no-underline outline-none focus:shadow-md"
                     href="/products"
                   >
                     <Search className="h-6 w-6 text-white" />
@@ -96,7 +96,7 @@ export function MainNav({ products: sanityProducts, categories: sanityCategories
         <NavigationMenuItem>
           <NavigationMenuTrigger className="bg-transparent">Categories</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+            <ul className="grid w-100 gap-3 p-4 md:w-125 md:grid-cols-2 lg:w-150">
               {displayCategories.map((component) => (
                 <ListItem
                   key={component.title}
