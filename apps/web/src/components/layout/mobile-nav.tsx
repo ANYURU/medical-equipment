@@ -29,7 +29,7 @@ export function MobileNav() {
             className="text-xl font-bold text-blue-600"
             onClick={() => setOpen(false)}
           >
-            MedEquip
+            MedSupply
           </Link>
           <Button
             variant="ghost"

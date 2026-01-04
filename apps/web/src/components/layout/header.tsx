@@ -23,7 +23,10 @@ export function Header({ products, categories }: HeaderProps) {
     }`}>
       <nav className="container flex h-16 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center space-x-2 mr-6">
-          <span className="text-xl font-bold">MedEquip</span>
+          <span className="text-xl font-bold">MedSupply</span>
+          <span className="text-xs font-semibold px-2 py-0.5 rounded bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400">
+            BETA
+          </span>
         </Link>
         
         <div className="flex-1 flex items-center justify-between">

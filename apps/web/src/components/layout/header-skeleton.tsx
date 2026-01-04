@@ -6,7 +6,7 @@ export function HeaderSkeleton() {
     <header className="sticky top-0 z-50 w-full bg-white/95 dark:bg-zinc-900/95 backdrop-blur-lg border-b">
       <nav className="container flex h-16 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center space-x-2 mr-6">
-          <span className="text-xl font-bold">MedEquip</span>
+          <span className="text-xl font-bold">MedSupply</span>
         </Link>
         
         <div className="flex-1 flex items-center justify-between">
