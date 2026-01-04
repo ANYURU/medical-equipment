@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "node scripts/check-node.js npm run dev --workspace=@medical-equipment/web",
     "build": "npm run build --workspaces",
+    "build:web": "npm run build --workspace=@medical-equipment/web",
     "start": "npm run start --workspace=@medical-equipment/web",
     "lint": "node scripts/check-node.js biome check --config-path=apps/web/biome.json apps/web/",
     "format": "node scripts/check-node.js biome format --write --config-path=apps/web/biome.json apps/web/",
