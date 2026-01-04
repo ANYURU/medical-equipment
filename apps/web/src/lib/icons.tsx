@@ -1,5 +1,7 @@
-export function getFeatureIcon(iconName: string) {
-  const icons: Record<string, JSX.Element> = {
+import type { ReactElement } from 'react'
+
+export function getFeatureIcon(iconName: string): ReactElement {
+  const icons: Record<string, ReactElement> = {
     shield: (
       <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
