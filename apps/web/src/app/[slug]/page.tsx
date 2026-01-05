@@ -29,7 +29,7 @@ export async function generateMetadata({
 
   return generateSEO({
     title: page.seo?.metaTitle || page.title,
-    description: page.seo?.metaDescription || page.content?.substring(0, 160),
+    description: page.seo?.metaDescription || page.content?.substring(0, 160) || '',
     path: `/${page.slug.current}`,
   })
 }
