@@ -75,6 +75,11 @@ export function Footer() {
                   Contact
                 </Link>
               </li>
+              <li>
+                <Link href="/faq" className="text-muted-foreground transition-colors hover:text-foreground">
+                  FAQ
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
