@@ -10,13 +10,13 @@ export function WhatsAppButton() {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2 group">
-      <span className="bg-white px-3 py-1.5 rounded-lg shadow-md text-sm font-medium text-slate-800 opacity-0 transform translate-x-4 transition-all group-hover:opacity-100 group-hover:translate-x-0 pointer-events-none">
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2 group pointer-events-none">
+      <span className="bg-white px-3 py-1.5 rounded-lg shadow-md text-sm font-medium text-slate-800 opacity-0 transform translate-x-4 transition-all group-hover:opacity-100 group-hover:translate-x-0">
         Chat with an Expert
       </span>
       <button
         onClick={handleClick}
-        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-110 hover:shadow-xl md:h-16 md:w-16"
+        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-transform hover:scale-110 hover:shadow-xl md:h-16 md:w-16 pointer-events-auto"
         aria-label="Chat on WhatsApp"
       >
         <div className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20"></div>
