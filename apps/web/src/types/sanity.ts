@@ -125,6 +125,29 @@ export interface Feature {
   order?: number
 }
 
+export interface FAQ {
+  _id: string
+  _type: 'faq'
+  question: string
+  answer: string
+  category?: string
+  order?: number
+}
+
+export interface Page {
+  _id: string
+  _type: 'page'
+  title: string
+  slug: {
+    current: string
+  }
+  content?: string
+  seo?: {
+    metaTitle?: string
+    metaDescription?: string
+  }
+}
+
 export interface Homepage {
   _id: string
   _type: 'homepage'
