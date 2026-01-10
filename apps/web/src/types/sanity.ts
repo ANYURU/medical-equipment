@@ -10,10 +10,22 @@ export interface SiteSettings {
       _type: 'reference'
     }
   }
+  seo?: {
+    metaTitle?: string
+    metaDescription?: string
+    keywords?: string
+    openGraphTitle?: string
+    openGraphDescription?: string
+    openGraphImage?: string
+    twitterTitle?: string
+    twitterDescription?: string
+    twitterImage?: string
+  }
   contactInfo?: {
     email?: string
     phone?: string
     address?: string
+    pobox?: string
     workingHours?: string
   }
   socialLinks?: {
