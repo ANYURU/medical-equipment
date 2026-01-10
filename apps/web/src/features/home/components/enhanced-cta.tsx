@@ -92,7 +92,7 @@ export function EnhancedCTA({data}: EnhancedCTAProps) {
               </div>
             </div>
             <div className="mt-8">
-              <Button asChild variant="outline" size="lg" className="border-white bg-transparent text-white hover:bg-white hover:text-blue-600">
+              <Button asChild variant="outline" size="lg" className="border-white bg-transparent text-white hover:bg-white hover:text-blue-600 cursor-pointer">
                 <Link href="/products">Browse Products</Link>
               </Button>
             </div>
@@ -164,7 +164,7 @@ export function EnhancedCTA({data}: EnhancedCTAProps) {
                         </FormItem>
                       )}
                     />
-                    <Button type="submit" className="w-full" size="lg" disabled={form.formState.isSubmitting}>
+                    <Button type="submit" className="w-full cursor-pointer" size="lg" disabled={form.formState.isSubmitting}>
                       {form.formState.isSubmitting ? 'Sending...' : 'Request Call Back'}
                     </Button>
                   </form>

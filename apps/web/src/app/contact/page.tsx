@@ -122,7 +122,7 @@ export default function ContactPage() {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full" size="lg">
+                <Button type="submit" className="w-full cursor-pointer" size="lg">
                   Send Message
                 </Button>
               </form>
