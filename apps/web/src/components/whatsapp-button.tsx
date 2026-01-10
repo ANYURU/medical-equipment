@@ -1,11 +1,29 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+import { client } from '@/lib/sanity'
+import type { SiteSettings } from '@/types/sanity'
+
 export function WhatsAppButton() {
-  const phoneNumber = '256700000000' // Replace with actual number
+  const [phone, setPhone] = useState('256700000000')
+
+  useEffect(() => {
+    async function fetchPhone() {
+      const settings = await client.fetch<SiteSettings>(
+        `*[_type == "siteSettings"][0] { contactInfo }`
+      )
+      if (settings?.contactInfo?.phone) {
+        const cleanPhone = settings.contactInfo.phone.replace(/[^0-9]/g, '')
+        setPhone(cleanPhone)
+      }
+    }
+    fetchPhone()
+  }, [])
+
   const message = "Hello, I'm interested in your medical equipment"
 
   const handleClick = () => {
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
     window.open(url, '_blank')
   }
 
