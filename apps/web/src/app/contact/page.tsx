@@ -1,9 +1,9 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
-import { Button } from '@/components/ui/button';
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -11,10 +11,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 
 const formSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -58,12 +57,11 @@ export default function ContactPage() {
       {/* Contact Form */}
       <div className="container px-4 py-12 md:px-6 md:py-16">
         <div className="mx-auto max-w-2xl">
-          <Card>
-            <CardHeader>
-              <CardTitle>Send us a message</CardTitle>
-              <CardDescription>We'll get back to you as soon as possible</CardDescription>
-            </CardHeader>
-            <CardContent>
+          <div className="rounded-lg border bg-card p-6 md:p-8">
+            <div className="mb-6">
+              <h2 className="text-2xl font-bold">Send us a message</h2>
+              <p className="mt-1 text-sm text-muted-foreground">We'll get back to you as soon as possible</p>
+            </div>
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <FormField
@@ -127,10 +125,9 @@ export default function ContactPage() {
                 </Button>
               </form>
             </Form>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
-    </div>
     </>
   );
 }
