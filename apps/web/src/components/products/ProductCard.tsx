@@ -10,7 +10,7 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   return (
-    <Link href={`/products/${product.slug.current}`} className="group block">
+    <Link href={`/products/${product.slug.current}`} className="group block cursor-pointer">
       <div className="overflow-hidden rounded-lg border bg-card transition-colors hover:bg-accent">
         <div className="relative aspect-square overflow-hidden bg-muted">
           {product.mainImage && (

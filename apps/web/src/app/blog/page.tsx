@@ -41,7 +41,7 @@ export default async function BlogPage() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
             <Link key={post._id} href={`/blog/${post.slug.current}`}>
-              <div className="h-full rounded-lg border bg-card p-6 transition-shadow hover:shadow-lg">
+              <div className="h-full rounded-lg border bg-card p-6 transition-shadow hover:shadow-lg cursor-pointer">
                 <div className="mb-4">
                   <h2 className="mb-2 line-clamp-2 text-xl font-bold">{post.title}</h2>
                   <p className="text-sm text-muted-foreground">
