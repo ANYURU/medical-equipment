@@ -1,15 +1,22 @@
-import Link from "next/link";
-import { client } from "@/lib/sanity";
-import type { SiteSettings } from "@/types/sanity";
+'use client'
 
-export async function Logo() {
-  const settings = await client.fetch<SiteSettings>(
-    `*[_type == "siteSettings"][0] { siteName }`
-  );
+import Link from "next/link"
+import { useEffect, useState } from "react"
 
-  const siteName = settings?.siteName || "Gombaland Medical Supplies";
-  const [firstWord, ...rest] = siteName.split(" ");
-  const subtitle = rest.join(" ") || "Medical Supplies";
+export function Logo() {
+  const [siteName, setSiteName] = useState("Gombaland Medical Supplies")
+
+  useEffect(() => {
+    fetch('/api/site-settings')
+      .then(res => res.json())
+      .then(data => {
+        if (data.siteName) setSiteName(data.siteName)
+      })
+      .catch(() => {})
+  }, [])
+
+  const [firstWord, ...rest] = siteName.split(" ")
+  const subtitle = rest.join(" ") || "Medical Supplies"
 
   return (
     <Link href="/" className="flex items-center gap-2 group">
@@ -33,5 +40,5 @@ export async function Logo() {
         </div>
       </div>
     </Link>
-  );
+  )
 }

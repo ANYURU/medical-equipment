@@ -6,7 +6,6 @@ import {MobileNav} from './mobile-nav'
 import {MainNav} from './main-nav'
 import {HeaderSearch} from './header-search'
 import {useScroll} from '@/hooks/use-scroll'
-import {Suspense} from 'react'
 import {Logo} from '@/components/logo'
 
 interface HeaderProps {
@@ -24,9 +23,7 @@ export function Header({ products, categories }: HeaderProps) {
         : 'bg-transparent'
     }`}>
       <nav className="container flex h-16 items-center justify-between px-4 md:px-6">
-        <Suspense fallback={<div className="h-10 w-48 bg-muted animate-pulse rounded" />}>
-          <Logo />
-        </Suspense>
+        <Logo />
         
         <div className="flex-1 flex items-center justify-between">
             {/* Desktop Navigation */}
