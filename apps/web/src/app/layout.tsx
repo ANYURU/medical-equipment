@@ -7,6 +7,8 @@ import {getNavigationData} from '@/components/layout/header-with-data'
 import {HeaderClient} from '@/components/layout/header-client'
 import {HeaderSkeleton} from '@/components/layout/header-skeleton'
 import {WhatsAppButton} from '@/components/whatsapp-button'
+import {client} from '@/lib/sanity'
+import type {SiteSettings} from '@/types/sanity'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -47,12 +49,15 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   const navigationPromise = getNavigationData()
+  const settings = await client.fetch<SiteSettings>(
+    `*[_type == "siteSettings"][0] { contactInfo }`
+  )
   
   return (
     <html lang="en">
@@ -65,7 +70,7 @@ export default function RootLayout({
         </Suspense>
         <main className="min-h-screen">{children}</main>
         <Footer />
-        <WhatsAppButton />
+        <WhatsAppButton phone={settings?.contactInfo?.phone} />
       </body>
     </html>
   )
