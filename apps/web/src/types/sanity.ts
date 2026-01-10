@@ -8,6 +8,14 @@ export interface SiteSettings {
     asset: {
       _ref: string
       _type: 'reference'
+      url?: string
+    }
+  }
+  favicon?: {
+    asset: {
+      _ref: string
+      _type: 'reference'
+      url?: string
     }
   }
   seo?: {

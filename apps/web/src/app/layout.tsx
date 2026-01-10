@@ -22,14 +22,19 @@ const geistMono = Geist_Mono({
 
 async function getMetadata(): Promise<Metadata> {
   const settings = await client.fetch<SiteSettings>(
-    `*[_type == "siteSettings"][0] { siteName, siteUrl, seo }`
+    `*[_type == "siteSettings"][0] { 
+      siteName, 
+      siteUrl, 
+      seo,
+      favicon { asset->{ url } }
+    }`
   )
 
   const title = settings?.siteName || 'Gombaland Medical Supplies'
   const description = settings?.seo?.metaDescription || 'Premium medical equipment and supplies for healthcare facilities across Uganda'
   const siteUrl = settings?.siteUrl || process.env.NEXT_PUBLIC_SITE_URL || 'https://medequip.com'
 
-  return {
+  const metadata: Metadata = {
     title: {
       default: title,
       template: `%s | ${title}`,
@@ -59,6 +64,16 @@ async function getMetadata(): Promise<Metadata> {
       follow: true,
     },
   }
+
+  if (settings?.favicon?.asset?.url) {
+    metadata.icons = {
+      icon: settings.favicon.asset.url,
+      shortcut: settings.favicon.asset.url,
+      apple: settings.favicon.asset.url,
+    }
+  }
+
+  return metadata
 }
 
 export async function generateMetadata(): Promise<Metadata> {
