@@ -8,12 +8,32 @@ export interface SiteSettings {
     asset: {
       _ref: string
       _type: 'reference'
+      url?: string
     }
+  }
+  favicon?: {
+    asset: {
+      _ref: string
+      _type: 'reference'
+      url?: string
+    }
+  }
+  seo?: {
+    metaTitle?: string
+    metaDescription?: string
+    keywords?: string
+    openGraphTitle?: string
+    openGraphDescription?: string
+    openGraphImage?: string
+    twitterTitle?: string
+    twitterDescription?: string
+    twitterImage?: string
   }
   contactInfo?: {
     email?: string
     phone?: string
     address?: string
+    pobox?: string
     workingHours?: string
   }
   socialLinks?: {
@@ -123,6 +143,29 @@ export interface Feature {
   description: string
   icon: string
   order?: number
+}
+
+export interface FAQ {
+  _id: string
+  _type: 'faq'
+  question: string
+  answer: string
+  category?: string
+  order?: number
+}
+
+export interface Page {
+  _id: string
+  _type: 'page'
+  title: string
+  slug: {
+    current: string
+  }
+  content?: string
+  seo?: {
+    metaTitle?: string
+    metaDescription?: string
+  }
 }
 
 export interface Homepage {

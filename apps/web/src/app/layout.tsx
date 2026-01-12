@@ -7,6 +7,8 @@ import {getNavigationData} from '@/components/layout/header-with-data'
 import {HeaderClient} from '@/components/layout/header-client'
 import {HeaderSkeleton} from '@/components/layout/header-skeleton'
 import {WhatsAppButton} from '@/components/whatsapp-button'
+import {client} from '@/lib/sanity'
+import type {SiteSettings} from '@/types/sanity'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -18,41 +20,73 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
-export const metadata: Metadata = {
-  title: {
-    default: 'MedEquip - Medical Equipment Supply Platform',
-    template: '%s | MedEquip',
-  },
-  description: 'Premium medical equipment and supplies for healthcare facilities across Uganda',
-  keywords: ['medical equipment', 'healthcare supplies', 'Uganda', 'hospital equipment'],
-  authors: [{name: 'MedEquip'}],
-  creator: 'MedEquip',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://medequip.com'),
-  openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: '/',
-    siteName: 'MedEquip',
-    title: 'MedEquip - Medical Equipment Supply Platform',
-    description: 'Premium medical equipment and supplies for healthcare facilities across Uganda',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'MedEquip - Medical Equipment Supply Platform',
-    description: 'Premium medical equipment and supplies for healthcare facilities across Uganda',
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
+async function getMetadata(): Promise<Metadata> {
+  const settings = await client.fetch<SiteSettings>(
+    `*[_type == "siteSettings"][0] { 
+      siteName, 
+      siteUrl, 
+      seo,
+      favicon { asset->{ url } }
+    }`
+  )
+
+  const title = settings?.siteName || 'Gombaland Medical Supplies'
+  const description = settings?.seo?.metaDescription || 'Premium medical equipment and supplies for healthcare facilities across Uganda'
+  const siteUrl = settings?.siteUrl || process.env.NEXT_PUBLIC_SITE_URL || 'https://medequip.com'
+
+  const metadata: Metadata = {
+    title: {
+      default: title,
+      template: `%s | ${title}`,
+    },
+    description,
+    keywords: settings?.seo?.keywords?.split(',').map(k => k.trim()) || ['medical equipment', 'healthcare supplies', 'Uganda', 'hospital equipment'],
+    authors: [{name: title}],
+    creator: title,
+    metadataBase: new URL(siteUrl),
+    openGraph: {
+      type: 'website',
+      locale: 'en_US',
+      url: '/',
+      siteName: title,
+      title: settings?.seo?.openGraphTitle || title,
+      description: settings?.seo?.openGraphDescription || description,
+      images: settings?.seo?.openGraphImage ? [settings.seo.openGraphImage] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: settings?.seo?.twitterTitle || title,
+      description: settings?.seo?.twitterDescription || description,
+      images: settings?.seo?.twitterImage ? [settings.seo.twitterImage] : [],
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  }
+
+  // Use local favicons
+  metadata.icons = {
+    icon: '/icon.svg',
+    apple: '/apple-touch-icon.png',
+  }
+
+  return metadata
 }
 
-export default function RootLayout({
+export async function generateMetadata(): Promise<Metadata> {
+  return getMetadata()
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   const navigationPromise = getNavigationData()
+  const settings = await client.fetch<SiteSettings>(
+    `*[_type == "siteSettings"][0] { contactInfo }`
+  )
   
   return (
     <html lang="en">
@@ -65,7 +99,7 @@ export default function RootLayout({
         </Suspense>
         <main className="min-h-screen">{children}</main>
         <Footer />
-        <WhatsAppButton />
+        <WhatsAppButton phone={settings?.contactInfo?.phone} />
       </body>
     </html>
   )
