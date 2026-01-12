@@ -65,12 +65,10 @@ async function getMetadata(): Promise<Metadata> {
     },
   }
 
-  if (settings?.favicon?.asset?.url) {
-    metadata.icons = {
-      icon: settings.favicon.asset.url,
-      shortcut: settings.favicon.asset.url,
-      apple: settings.favicon.asset.url,
-    }
+  // Use local favicons
+  metadata.icons = {
+    icon: '/icon.svg',
+    apple: '/apple-touch-icon.png',
   }
 
   return metadata
