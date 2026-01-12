@@ -8,7 +8,10 @@ interface BlogPost {
   title: string;
   slug: { current: string };
   excerpt?: string;
-  content?: string;
+  content?: Array<{
+    _type: string;
+    children: Array<{ text: string }>;
+  }>;
   publishedAt: string;
   author?: { name: string };
   categories?: Array<{ title: string }>;
@@ -76,7 +79,11 @@ export default async function BlogPostPage({
 
         {post.content && (
           <div className="prose prose-gray max-w-none dark:prose-invert">
-            <p>{post.content}</p>
+            {post.content.map((block, i) => (
+              <p key={i}>
+                {block.children.map((child) => child.text).join('')}
+              </p>
+            ))}
           </div>
         )}
       </div>

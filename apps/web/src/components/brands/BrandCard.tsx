@@ -9,7 +9,7 @@ interface BrandCardProps {
 
 export function BrandCard({ brand }: BrandCardProps) {
   return (
-    <Link href={`/brands/${brand.slug.current}`} className="group block">
+    <Link href={`/brands/${brand.slug.current}`} className="group block cursor-pointer">
       <div className="overflow-hidden rounded-lg border bg-card p-8 transition-colors hover:bg-accent">
         {brand.logo && (
           <div className="relative h-24 w-full">

@@ -18,6 +18,7 @@ export default defineType({
         {name: 'email', title: 'Email', type: 'string'},
         {name: 'phone', title: 'Phone', type: 'string'},
         {name: 'address', title: 'Address', type: 'text', rows: 3},
+        {name: 'pobox', title: 'P.O Box', type: 'string'},
         {name: 'workingHours', title: 'Working Hours', type: 'string'},
       ],
     },

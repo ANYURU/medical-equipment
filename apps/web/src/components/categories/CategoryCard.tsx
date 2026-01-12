@@ -9,7 +9,7 @@ interface CategoryCardProps {
 
 export function CategoryCard({ category }: CategoryCardProps) {
   return (
-    <Link href={`/categories/${category.slug.current}`} className="group block">
+    <Link href={`/categories/${category.slug.current}`} className="group block cursor-pointer">
       <div className="overflow-hidden rounded-lg border bg-card transition-colors hover:bg-accent">
         {category.image && (
           <div className="relative aspect-video overflow-hidden bg-muted">
