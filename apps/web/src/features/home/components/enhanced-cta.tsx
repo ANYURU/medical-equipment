@@ -3,7 +3,8 @@
 import {zodResolver} from '@hookform/resolvers/zod'
 import {useForm} from 'react-hook-form'
 import {useState} from 'react'
-import * as z from 'zod'
+import {toast} from 'sonner'
+import {contactFormSchema, type ContactFormData} from '@/lib/validations/contact'
 import Link from 'next/link'
 import {Button} from '@/components/ui/button'
 import {Form, FormControl, FormField, FormItem, FormMessage} from '@/components/ui/form'
@@ -21,31 +22,47 @@ interface EnhancedCTAProps {
   }
 }
 
-const formSchema = z.object({
-  name: z.string().min(2, 'Name required'),
-  email: z.string().email('Invalid email'),
-  phone: z.string().min(10, 'Phone required'),
-  message: z.string().optional(),
-})
+const formSchema = contactFormSchema
 
 export function EnhancedCTA({data}: EnhancedCTAProps) {
-  const [isSuccess, setIsSuccess] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const heading = data?.heading || 'Ready to Equip Your Healthcare Facility?'
   const description =
     data?.description ||
     "Get in touch with our team to discuss your equipment needs and receive a customized quote. We're here to support your mission of delivering exceptional healthcare."
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<ContactFormData>({
     resolver: zodResolver(formSchema),
-    defaultValues: {name: '', email: '', phone: '', message: ''},
+    defaultValues: {name: '', email: '', phone: '', subject: 'Quote Request', message: ''},
   })
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    setIsSuccess(true)
-    form.reset()
-    setTimeout(() => setIsSuccess(false), 5000)
+  async function onSubmit(values: ContactFormData) {
+    setIsSubmitting(true)
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message')
+      }
+
+      form.reset()
+      toast.success('Request sent successfully!', {
+        description: 'We\'ll call you back within 24 hours.',
+      })
+    } catch (error) {
+      toast.error('Failed to send request', {
+        description: error instanceof Error ? error.message : 'Please try again later.',
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -100,20 +117,8 @@ export function EnhancedCTA({data}: EnhancedCTAProps) {
 
           {/* Right: Form */}
           <div className="rounded-lg border bg-white p-6 shadow-xl md:p-8">
-            {isSuccess ? (
-              <div className="text-center">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
-                  <svg className="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <h3 className="mb-2 text-xl font-bold text-gray-900">Thank You!</h3>
-                <p className="text-gray-600">We'll call you back within 24 hours</p>
-              </div>
-            ) : (
-              <>
-                <h3 className="mb-2 text-2xl font-bold text-gray-900">Get a Free Quote</h3>
-                <p className="mb-6 text-sm text-gray-600">Fill out the form and we'll contact you within 24 hours</p>
+            <h3 className="mb-2 text-2xl font-bold text-gray-900">Get a Free Quote</h3>
+            <p className="mb-6 text-sm text-gray-600">Fill out the form and we'll contact you within 24 hours</p>
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                     <FormField
@@ -164,13 +169,11 @@ export function EnhancedCTA({data}: EnhancedCTAProps) {
                         </FormItem>
                       )}
                     />
-                    <Button type="submit" className="w-full cursor-pointer" size="lg" disabled={form.formState.isSubmitting}>
-                      {form.formState.isSubmitting ? 'Sending...' : 'Request Call Back'}
+                    <Button type="submit" className="w-full cursor-pointer" size="lg" disabled={isSubmitting}>
+                      {isSubmitting ? 'Sending...' : 'Request Call Back'}
                     </Button>
                   </form>
                 </Form>
-              </>
-            )}
           </div>
         </div>
       </div>
