@@ -17,6 +17,7 @@ import distributor from '../schemas/documents/distributor'
 import stat from '../schemas/documents/stat'
 import testimonial from '../schemas/documents/testimonial'
 import feature from '../schemas/documents/feature'
+import contactSubmission from '../schemas/documents/contactSubmission'
 
 export const schemaTypes = [
   seo,
@@ -37,4 +38,5 @@ export const schemaTypes = [
   stat,
   testimonial,
   feature,
+  contactSubmission,
 ]
