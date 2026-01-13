@@ -8,6 +8,7 @@ import {HeaderClient} from '@/components/layout/header-client'
 import {HeaderSkeleton} from '@/components/layout/header-skeleton'
 import {WhatsAppButton} from '@/components/whatsapp-button'
 import {StructuredData} from '@/components/structured-data'
+import {Toaster} from 'sonner'
 import {client} from '@/lib/sanity'
 import type {SiteSettings} from '@/types/sanity'
 
@@ -113,6 +114,7 @@ export default async function RootLayout({
         <main className="min-h-screen">{children}</main>
         <Footer />
         <WhatsAppButton phone={settings?.contactInfo?.phone} />
+        <Toaster position="top-right" />
       </body>
     </html>
   )

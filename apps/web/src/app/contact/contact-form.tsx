@@ -3,6 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
+import { toast } from 'sonner'
 import { contactFormSchema, type ContactFormData } from '@/lib/validations/contact'
 import { Button } from '@/components/ui/button'
 import {
@@ -18,10 +19,6 @@ import { Textarea } from '@/components/ui/textarea'
 
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<{
-    type: 'success' | 'error'
-    message: string
-  } | null>(null)
 
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
@@ -36,7 +33,6 @@ export function ContactForm() {
 
   async function onSubmit(values: ContactFormData) {
     setIsSubmitting(true)
-    setSubmitStatus(null)
 
     try {
       const response = await fetch('/api/contact', {
@@ -51,15 +47,13 @@ export function ContactForm() {
         throw new Error(data.error || 'Failed to send message')
       }
 
-      setSubmitStatus({
-        type: 'success',
-        message: data.message || 'Message sent successfully!',
+      toast.success('Message sent successfully!', {
+        description: 'We\'ll get back to you within 24 hours.',
       })
       form.reset()
     } catch (error) {
-      setSubmitStatus({
-        type: 'error',
-        message: error instanceof Error ? error.message : 'Failed to send message. Please try again.',
+      toast.error('Failed to send message', {
+        description: error instanceof Error ? error.message : 'Please try again later.',
       })
     } finally {
       setIsSubmitting(false)
@@ -72,18 +66,6 @@ export function ContactForm() {
         <h2 className="text-2xl font-bold">Send us a message</h2>
         <p className="mt-1 text-sm text-muted-foreground">We'll get back to you as soon as possible</p>
       </div>
-
-      {submitStatus && (
-        <div
-          className={`mb-6 rounded-lg border p-4 ${
-            submitStatus.type === 'success'
-              ? 'border-green-200 bg-green-50 text-green-800'
-              : 'border-red-200 bg-red-50 text-red-800'
-          }`}
-        >
-          {submitStatus.message}
-        </div>
-      )}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
