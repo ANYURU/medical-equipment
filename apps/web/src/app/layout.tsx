@@ -7,6 +7,7 @@ import {getNavigationData} from '@/components/layout/header-with-data'
 import {HeaderClient} from '@/components/layout/header-client'
 import {HeaderSkeleton} from '@/components/layout/header-skeleton'
 import {WhatsAppButton} from '@/components/whatsapp-button'
+import {StructuredData} from '@/components/structured-data'
 import {client} from '@/lib/sanity'
 import type {SiteSettings} from '@/types/sanity'
 
@@ -63,6 +64,9 @@ async function getMetadata(): Promise<Metadata> {
       index: true,
       follow: true,
     },
+    alternates: {
+      canonical: '/',
+    },
   }
 
   // Use local favicons
@@ -85,11 +89,20 @@ export default async function RootLayout({
 }>) {
   const navigationPromise = getNavigationData()
   const settings = await client.fetch<SiteSettings>(
-    `*[_type == "siteSettings"][0] { contactInfo }`
+    `*[_type == "siteSettings"][0] { 
+      siteName,
+      siteUrl,
+      seo,
+      contactInfo,
+      socialLinks
+    }`
   )
   
   return (
     <html lang="en">
+      <head>
+        <StructuredData settings={settings} />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning

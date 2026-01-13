@@ -2,7 +2,8 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import * as z from 'zod'
+import { useState } from 'react'
+import { contactFormSchema, type ContactFormData } from '@/lib/validations/contact'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -15,26 +16,54 @@ import {
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 
-const formSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
-  phone: z.string().optional(),
-  message: z.string().min(10, 'Message must be at least 10 characters'),
-})
-
 export function ContactForm() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error'
+    message: string
+  } | null>(null)
+
+  const form = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
     defaultValues: {
       name: '',
       email: '',
       phone: '',
+      subject: '',
       message: '',
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+  async function onSubmit(values: ContactFormData) {
+    setIsSubmitting(true)
+    setSubmitStatus(null)
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send message')
+      }
+
+      setSubmitStatus({
+        type: 'success',
+        message: data.message || 'Message sent successfully!',
+      })
+      form.reset()
+    } catch (error) {
+      setSubmitStatus({
+        type: 'error',
+        message: error instanceof Error ? error.message : 'Failed to send message. Please try again.',
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -43,6 +72,18 @@ export function ContactForm() {
         <h2 className="text-2xl font-bold">Send us a message</h2>
         <p className="mt-1 text-sm text-muted-foreground">We'll get back to you as soon as possible</p>
       </div>
+
+      {submitStatus && (
+        <div
+          className={`mb-6 rounded-lg border p-4 ${
+            submitStatus.type === 'success'
+              ? 'border-green-200 bg-green-50 text-green-800'
+              : 'border-red-200 bg-red-50 text-red-800'
+          }`}
+        >
+          {submitStatus.message}
+        </div>
+      )}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
@@ -86,6 +127,19 @@ export function ContactForm() {
           />
           <FormField
             control={form.control}
+            name="subject"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Subject (Optional)</FormLabel>
+                <FormControl>
+                  <Input placeholder="Equipment inquiry" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name="message"
             render={({ field }) => (
               <FormItem>
@@ -101,8 +155,8 @@ export function ContactForm() {
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full cursor-pointer" size="lg">
-            Send Message
+          <Button type="submit" className="w-full cursor-pointer" size="lg" disabled={isSubmitting}>
+            {isSubmitting ? 'Sending...' : 'Send Message'}
           </Button>
         </form>
       </Form>
