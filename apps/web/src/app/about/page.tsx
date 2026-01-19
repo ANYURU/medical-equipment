@@ -8,7 +8,7 @@ export default function AboutPage() {
         <div className="container px-4 md:px-6">
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="text-3xl font-bold tracking-tight md:text-4xl lg:text-5xl">
-              About Gombaland Medical Supplies
+              About Gombaland Uganda Limited
             </h1>
             <p className="mt-4 text-lg text-muted-foreground">
               Your trusted partner in medical equipment supply since 2011

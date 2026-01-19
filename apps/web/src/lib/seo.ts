@@ -8,7 +8,7 @@ interface SEOProps {
 }
 
 export function generateSEO({ title, description, path = '', image }: SEOProps): Metadata {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gombaland.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://biomedengsug.org';
   const fullUrl = `${siteUrl}${path}`;
   const ogImage = image || `${siteUrl}/og-image.png`;
 
@@ -19,7 +19,7 @@ export function generateSEO({ title, description, path = '', image }: SEOProps):
       title,
       description,
       url: fullUrl,
-      siteName: 'Gombaland Medical Supplies',
+      siteName: 'Gombaland Uganda Limited',
       images: [{ url: ogImage }],
       locale: 'en_US',
       type: 'website',

@@ -32,9 +32,9 @@ async function getMetadata(): Promise<Metadata> {
     }`
   )
 
-  const title = settings?.siteName || 'Gombaland Medical Supplies'
+  const title = settings?.siteName || 'Gombaland Uganda Limited'
   const description = settings?.seo?.metaDescription || 'Premium medical equipment and supplies for healthcare facilities across Uganda'
-  const siteUrl = settings?.siteUrl || process.env.NEXT_PUBLIC_SITE_URL || 'https://gombaland.com'
+  const siteUrl = settings?.siteUrl || process.env.NEXT_PUBLIC_SITE_URL || 'https://biomedengsug.org'
 
   const metadata: Metadata = {
     title: {

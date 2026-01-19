@@ -12,7 +12,7 @@ const defaultTestimonials: Testimonial[] = [
   {
     _id: '1',
     _type: 'testimonial',
-    quote: 'Medequip Uganda transformed our ICU with state-of-the-art equipment and exceptional installation service. Their support team is always responsive.',
+    quote: 'Gombaland transformed our ICU with state-of-the-art equipment and exceptional installation service. Their support team is always responsive.',
     author: 'Dr. Sarah Namukasa',
     role: 'Head of ICU',
     facility: 'Mulago Hospital',

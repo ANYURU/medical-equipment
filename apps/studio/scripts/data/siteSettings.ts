@@ -2,9 +2,9 @@ export const siteSettingsData = {
   _id: 'siteSettings',
   _type: 'siteSettings',
   siteName: 'Gombaland Uganda Limited',
-  siteUrl: 'https://biomedengsug.com',
+  siteUrl: 'https://biomedengsug.org',
   contactInfo: {
-    email: 'info@gombaland.com',
+    email: 'info@biomedengsug.org',
     phone: '256 775 716129 / 256 775 841793',
     address: 'Block 29, Plot 1521 Mawanda Road, Kampala',
     pobox: 'P.O Box 23350, Kampala, Uganda',

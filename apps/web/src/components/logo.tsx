@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 
 export function Logo() {
-  const [siteName, setSiteName] = useState("Gombaland Medical Supplies")
+  const [siteName, setSiteName] = useState("Gombaland Uganda Limited")
   const [logoUrl, setLogoUrl] = useState<string | null>(null)
 
   useEffect(() => {
