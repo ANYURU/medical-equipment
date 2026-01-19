@@ -1,15 +1,21 @@
 import { MetadataRoute } from 'next'
 import { client } from '@/lib/sanity'
+import type { SiteSettings } from '@/types/sanity'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://biomedengsug.org'
+  // Fetch site URL from Sanity
+  const settings = await client.fetch<SiteSettings>(
+    `*[_type == "siteSettings"][0] { siteUrl }`
+  )
+  const baseUrl = settings?.siteUrl || process.env.NEXT_PUBLIC_SITE_URL || 'https://biomedengsug.org'
 
   // Fetch dynamic content
-  const [products, categories, brands, blogPosts, pages] = await Promise.all([
-    client.fetch(`*[_type == "product" && !(_id in path("drafts.**"))] { "slug": slug.current, _updatedAt }`),
+  const [products, categories, brands, blogPosts, services, pages] = await Promise.all([
+    client.fetch(`*[_type == "product" && !(_id in path("drafts.**"))] { "slug": slug.current, _updatedAt, mainImage }`),
     client.fetch(`*[_type == "category" && !(_id in path("drafts.**"))] { "slug": slug.current, _updatedAt }`),
     client.fetch(`*[_type == "brand" && !(_id in path("drafts.**"))] { "slug": slug.current, _updatedAt }`),
     client.fetch(`*[_type == "post" && !(_id in path("drafts.**"))] { "slug": slug.current, _updatedAt }`),
+    client.fetch(`*[_type == "service" && !(_id in path("drafts.**"))] { "slug": slug.current, _updatedAt }`),
     client.fetch(`*[_type == "page" && !(_id in path("drafts.**"))] { "slug": slug.current, _updatedAt }`),
   ])
 
@@ -38,6 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(product._updatedAt),
       changeFrequency: 'weekly' as const,
       priority: 0.8,
+      images: product.mainImage ? [`${baseUrl}/products/${product.slug}`] : undefined,
     })),
     ...categories.map((category: any) => ({
       url: `${baseUrl}/categories/${category.slug}`,
@@ -50,6 +57,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(brand._updatedAt),
       changeFrequency: 'weekly' as const,
       priority: 0.7,
+    })),
+    ...services.map((service: any) => ({
+      url: `${baseUrl}/services/${service.slug}`,
+      lastModified: new Date(service._updatedAt),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
     })),
     ...blogPosts.map((post: any) => ({
       url: `${baseUrl}/blog/${post.slug}`,
