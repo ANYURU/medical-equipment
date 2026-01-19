@@ -34,7 +34,7 @@ async function getMetadata(): Promise<Metadata> {
 
   const title = settings?.siteName || 'Gombaland Medical Supplies'
   const description = settings?.seo?.metaDescription || 'Premium medical equipment and supplies for healthcare facilities across Uganda'
-  const siteUrl = settings?.siteUrl || process.env.NEXT_PUBLIC_SITE_URL || 'https://medequip.com'
+  const siteUrl = settings?.siteUrl || process.env.NEXT_PUBLIC_SITE_URL || 'https://gombaland.com'
 
   const metadata: Metadata = {
     title: {
