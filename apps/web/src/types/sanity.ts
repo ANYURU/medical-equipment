@@ -78,11 +78,18 @@ export interface Product {
   slug: {
     current: string
   }
+  sku?: string
   description?: string
+  content?: any[]
   mainImage: SanityImage
+  gallery?: SanityImage[]
   price?: number
   brand?: Brand
   categories?: Category[]
+  specifications?: Array<{ label: string; value: string }>
+  features?: string[]
+  applications?: string[]
+  status?: 'available' | 'coming_soon' | 'discontinued'
   featured?: boolean
 }
 
