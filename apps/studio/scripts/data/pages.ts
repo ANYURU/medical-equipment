@@ -7,7 +7,7 @@ export const pagesData = [
     content: [
       {
         _type: 'block',
-        children: [{_type: 'span', text: 'Medequip Uganda Limited is a registered company incorporated under the laws of the Republic of Uganda in 2011, with our head office located at Block 29, Plot 1521 Mawanda Road, Kampala.'}],
+        children: [{_type: 'span', text: 'Gombaland Uganda Limted is a registered company incorporated under the laws of the Republic of Uganda in 2011, with our head office located at Block 29, Plot 1521 Mawanda Road, Kampala.'}],
       },
       {
         _type: 'block',
@@ -34,7 +34,7 @@ export const pagesData = [
     slug: {current: 'privacy'},
     content: `Last updated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
 
-At MedSupply Uganda, we are committed to protecting your privacy and ensuring the security of your personal information.
+At Gombaland Uganda Limited, we are committed to protecting your privacy and ensuring the security of your personal information.
 
 1. Information We Collect
 We collect information you provide directly to us, such as when you create an account, place an order, or contact us for support.
@@ -52,10 +52,10 @@ We implement appropriate security measures to protect your personal information.
 You have the right to access, correct, or delete your personal information.
 
 6. Contact Us
-If you have questions about this Privacy Policy, please contact us at info@medequip.ug`,
+If you have questions about this Privacy Policy, please contact us at info@biomedengsug.org`,
     seo: {
-      metaTitle: 'Privacy Policy - MedSupply Uganda',
-      metaDescription: 'Learn how MedSupply Uganda collects, uses, and protects your personal information.',
+      metaTitle: 'Privacy Policy - Gombaland Uganda Limited',
+      metaDescription: 'Learn how Gombaland Uganda Limited collects, uses, and protects your personal information.',
     },
   },
   {
@@ -65,7 +65,7 @@ If you have questions about this Privacy Policy, please contact us at info@medeq
     slug: {current: 'terms'},
     content: `Last updated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
 
-Welcome to MedSupply Uganda. By accessing our website and services, you agree to these Terms of Service.
+Welcome to Gombaland Uganda Limited. By accessing our website and services, you agree to these Terms of Service.
 
 1. Use of Services
 You agree to use our services only for lawful purposes and in accordance with these Terms.
@@ -80,16 +80,16 @@ All orders are subject to acceptance and availability. Payment terms will be spe
 Products are covered by manufacturer warranties. Please refer to individual product documentation.
 
 5. Limitation of Liability
-MedSupply Uganda shall not be liable for any indirect, incidental, or consequential damages.
+Gombaland Uganda Limited shall not be liable for any indirect, incidental, or consequential damages.
 
 6. Governing Law
 These Terms are governed by the laws of the Republic of Uganda.
 
 7. Contact Information
-For questions about these Terms, contact us at info@medequip.ug`,
+For questions about these Terms, contact us at info@biomedengsug.org`,
     seo: {
-      metaTitle: 'Terms of Service - MedSupply Uganda',
-      metaDescription: 'Read the terms and conditions for using MedSupply Uganda services.',
+      metaTitle: 'Terms of Service - Gombaland Uganda Limited',
+      metaDescription: 'Read the terms and conditions for using Gombaland Uganda Limited services.',
     },
   },
 ]

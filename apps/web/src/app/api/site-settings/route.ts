@@ -12,6 +12,6 @@ export async function GET() {
     )
     return NextResponse.json(settings || {})
   } catch (error) {
-    return NextResponse.json({ siteName: 'Gombaland Medical Supplies' })
+    return NextResponse.json({ siteName: 'Gombaland Uganda Limited' })
   }
 }

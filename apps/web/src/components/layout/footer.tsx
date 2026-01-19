@@ -21,7 +21,7 @@ export async function Footer() {
       <div className="container px-4 py-12 md:px-6 md:py-16">
         <div className="grid gap-8 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <h3 className="mb-4 text-lg font-bold">{settings?.siteName || 'MedSupply Uganda'}</h3>
+            <h3 className="mb-4 text-lg font-bold">{settings?.siteName || 'Gombaland Uganda Limited'}</h3>
             <p className="mb-4 text-sm text-muted-foreground">
               {settings?.footerText || 'Premium medical equipment and supplies for healthcare facilities across Uganda and East Africa.'}
             </p>
@@ -154,7 +154,7 @@ export async function Footer() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="MedSupply Location"
+                title="Gombaland Uganda Limited Location"
               ></iframe>
             </div>
             <a 
@@ -172,7 +172,7 @@ export async function Footer() {
         </div>
         <div className="mt-12 border-t pt-8">
           <div className="flex flex-col items-center justify-between gap-4 text-sm text-muted-foreground sm:flex-row">
-            <p>&copy; {new Date().getFullYear()} {settings?.siteName || 'MedSupply Uganda'}. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} {settings?.siteName || 'Gombaland Uganda Limited'}. All rights reserved.</p>
             <div className="flex gap-4">
               <Link href="/privacy" className="hover:text-foreground">
                 Privacy
