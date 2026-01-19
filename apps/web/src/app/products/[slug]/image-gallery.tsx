@@ -29,27 +29,29 @@ export function ImageGallery({ images, productName }: ImageGalleryProps) {
         />
       </div>
 
-      {/* Thumbnails */}
+      {/* Thumbnails - Single scrollable row */}
       {images.length > 1 && (
-        <div className="grid grid-cols-5 gap-2">
-          {images.slice(0, 10).map((image: any, index: number) => (
-            <button
-              key={index}
-              onClick={() => setSelectedIndex(index)}
-              className={`relative aspect-square overflow-hidden rounded border-2 bg-muted transition-all cursor-pointer ${
-                selectedIndex === index
-                  ? 'border-blue-600 ring-2 ring-blue-600 ring-offset-2'
-                  : 'border-transparent hover:border-gray-300'
-              }`}
-            >
-              <Image
-                src={urlFor(image).width(200).height(200).url()}
-                alt={image.alt || `${productName} thumbnail ${index + 1}`}
-                fill
-                className="object-cover"
-              />
-            </button>
-          ))}
+        <div className="relative">
+          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+            {images.map((image: any, index: number) => (
+              <button
+                key={index}
+                onClick={() => setSelectedIndex(index)}
+                className={`relative h-20 w-20 shrink-0 overflow-hidden rounded border-2 bg-muted transition-all cursor-pointer ${
+                  selectedIndex === index
+                    ? 'border-blue-600 ring-2 ring-blue-600 ring-offset-2'
+                    : 'border-transparent hover:border-gray-300'
+                }`}
+              >
+                <Image
+                  src={urlFor(image).width(200).height(200).url()}
+                  alt={image.alt || `${productName} thumbnail ${index + 1}`}
+                  fill
+                  className="object-cover"
+                />
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </div>
