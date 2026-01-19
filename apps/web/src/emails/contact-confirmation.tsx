@@ -17,7 +17,7 @@ export function ContactConfirmationEmail({ name }: ContactConfirmationEmailProps
   return (
     <Html>
       <Head />
-      <Preview>Thank you for contacting MedSupply Uganda</Preview>
+      <Preview>Thank you for contacting Gombaland Uganda Limited</Preview>
       <Body style={main}>
         <Container style={container}>
           <Heading style={h1}>Thank You for Contacting Us</Heading>
@@ -27,7 +27,7 @@ export function ContactConfirmationEmail({ name }: ContactConfirmationEmailProps
           </Text>
 
           <Text style={text}>
-            Thank you for reaching out to MedSupply Uganda. We have received your message 
+            Thank you for reaching out to Gombaland Uganda Limited. We have received your message 
             and will get back to you within 24 hours.
           </Text>
 
@@ -47,7 +47,7 @@ export function ContactConfirmationEmail({ name }: ContactConfirmationEmailProps
 
           <Text style={footer}>
             Best regards,<br />
-            MedSupply Uganda Team
+            Gombaland Uganda Limited Team
           </Text>
         </Container>
       </Body>
