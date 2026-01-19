@@ -4,6 +4,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { client, urlFor } from '@/lib/sanity'
 import { Badge } from '@/components/ui/badge'
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb'
 import { generateSEO } from '@/lib/seo'
 import type { Product } from '@/types/sanity'
 import { RequestQuoteDialog } from './request-quote-dialog'
@@ -79,21 +87,37 @@ export default async function ProductDetailPage({
         {/* Breadcrumbs */}
         <div className="border-b bg-muted/30">
           <div className="container px-4 py-3 md:px-6">
-            <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Link href="/" className="hover:text-foreground">Home</Link>
-              <span>/</span>
-              <Link href="/products" className="hover:text-foreground">Products</Link>
-              {product.categories?.[0] && (
-                <>
-                  <span>/</span>
-                  <Link href={`/categories/${product.categories[0].slug.current}`} className="hover:text-foreground">
-                    {product.categories[0].title}
-                  </Link>
-                </>
-              )}
-              <span>/</span>
-              <span className="text-foreground">{product.name}</span>
-            </nav>
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link href="/">Home</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link href="/products">Products</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                {product.categories?.[0] && (
+                  <>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                      <BreadcrumbLink asChild>
+                        <Link href={`/categories/${product.categories[0].slug.current}`}>
+                          {product.categories[0].title}
+                        </Link>
+                      </BreadcrumbLink>
+                    </BreadcrumbItem>
+                  </>
+                )}
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>{product.name}</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
           </div>
         </div>
 
