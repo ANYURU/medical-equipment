@@ -68,6 +68,11 @@ export interface Brand {
   }
   logo: SanityImage
   description?: string
+  content?: any[]
+  bannerImage?: SanityImage
+  website?: string
+  country?: string
+  certifications?: string[]
   featured?: boolean
   order?: number
 }
