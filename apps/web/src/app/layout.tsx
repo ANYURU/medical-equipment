@@ -27,7 +27,12 @@ async function getMetadata(): Promise<Metadata> {
     `*[_type == "siteSettings"][0] { 
       siteName, 
       siteUrl, 
-      seo,
+      seo {
+        metaTitle,
+        metaDescription,
+        keywords,
+        ogImage { asset->{ url } }
+      },
       favicon { asset->{ url } }
     }`
   )
@@ -35,6 +40,7 @@ async function getMetadata(): Promise<Metadata> {
   const title = settings?.siteName || 'Gombaland Uganda Limited'
   const description = settings?.seo?.metaDescription || 'Premium medical equipment and supplies for healthcare facilities across Uganda'
   const siteUrl = settings?.siteUrl || process.env.NEXT_PUBLIC_SITE_URL || 'https://biomedengsug.org'
+  const ogImageUrl = settings?.seo?.ogImage?.asset?.url
 
   const metadata: Metadata = {
     title: {
@@ -42,7 +48,7 @@ async function getMetadata(): Promise<Metadata> {
       template: `%s | ${title}`,
     },
     description,
-    keywords: settings?.seo?.keywords?.split(',').map(k => k.trim()) || ['medical equipment', 'healthcare supplies', 'Uganda', 'hospital equipment'],
+    keywords: settings?.seo?.keywords || ['medical equipment', 'healthcare supplies', 'Uganda', 'hospital equipment'],
     authors: [{name: title}],
     creator: title,
     metadataBase: new URL(siteUrl),
@@ -51,15 +57,15 @@ async function getMetadata(): Promise<Metadata> {
       locale: 'en_US',
       url: '/',
       siteName: title,
-      title: settings?.seo?.openGraphTitle || title,
-      description: settings?.seo?.openGraphDescription || description,
-      images: settings?.seo?.openGraphImage ? [settings.seo.openGraphImage] : [],
+      title: settings?.seo?.metaTitle || title,
+      description: settings?.seo?.metaDescription || description,
+      images: ogImageUrl ? [{ url: ogImageUrl, width: 1200, height: 630 }] : [],
     },
     twitter: {
       card: 'summary_large_image',
-      title: settings?.seo?.twitterTitle || title,
-      description: settings?.seo?.twitterDescription || description,
-      images: settings?.seo?.twitterImage ? [settings.seo.twitterImage] : [],
+      title: settings?.seo?.metaTitle || title,
+      description: settings?.seo?.metaDescription || description,
+      images: ogImageUrl ? [ogImageUrl] : [],
     },
     robots: {
       index: true,

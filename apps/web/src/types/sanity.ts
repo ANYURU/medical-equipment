@@ -21,13 +21,14 @@ export interface SiteSettings {
   seo?: {
     metaTitle?: string
     metaDescription?: string
-    keywords?: string
-    openGraphTitle?: string
-    openGraphDescription?: string
-    openGraphImage?: string
-    twitterTitle?: string
-    twitterDescription?: string
-    twitterImage?: string
+    keywords?: string[]
+    ogImage?: {
+      asset: {
+        _ref: string
+        _type: 'reference'
+        url?: string
+      }
+    }
   }
   contactInfo?: {
     email?: string
