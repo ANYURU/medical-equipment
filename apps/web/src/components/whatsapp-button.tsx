@@ -8,7 +8,9 @@ export function WhatsAppButton({ phone = '256700000000' }: WhatsAppButtonProps) 
   const message = "Hello, I'm interested in your medical equipment"
 
   const handleClick = () => {
-    const cleanPhone = phone.replace(/[^0-9]/g, '')
+    // Handle multiple phone numbers separated by | or /
+    const firstPhone = phone.split(/[|/]/)[0].trim()
+    const cleanPhone = firstPhone.replace(/[^0-9]/g, '')
     const url = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`
     window.open(url, '_blank')
   }
